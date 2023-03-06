@@ -1,0 +1,19 @@
+body {
+    --spacing: 10px;
+    --padding: 5px;
+}
+
+html {
+    font-size: 12px;
+}
+
+#grid-pagina {
+    display: block;
+    /*afisate pe rand pe o singura coloana in ordinea din html*/
+}
+
+#tabel {
+    overflow-x: scroll;
+    width: 300px;
+    text-align: center;
+}

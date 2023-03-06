@@ -3,7 +3,37 @@ p.oferta {
 }
 
 p {
-    color: rgb(36, 46, 36);
+    padding: 5px;
+    text-indent: 2em;
+    margin: 1em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0.2em;
+    padding: 0.2em;
+}
+
+#icons {
+    margin-left: -2em;
+}
+
+html {
+    font-size: 16px;
+}
+
+ul {
+    padding-left: 15px;
+}
+
+
+#Special {
+    font-family: 'Tangerine', serif;
+    font-size: 48px;
 }
 
 #Oferte {
@@ -12,38 +42,28 @@ p {
 }
 
 #Descriere>h2 {
-    background-color: orange;
+    background-color: var(--background-color);
+    color: var(--background-white);
+    padding-left: 10px;
 }
 
-/* h2+p {
-    border: 10px green solid;
-} */
-
-/* Paragraful de dupa h1 (frate direct ) */
-
-/* h2~div {
-    border: 10px green solid;
-} */
-
-/* Paragraful de dupa h1 (frate indirect, toate div-urile de dupa h2 ) */
-
-/* Efect de cascada, il ia pe ultimul */
-
 body {
-    --culoare-mov: rgb(43, 29, 63);
-    --roz-deschis: #c93660;
-    --culoare-fundal: #f5f5f5;
-    --culoare-text: black;
-    --culoare-background: #131E42;
-    --culoare1: #24124F;
-    --culoare2: #151559;
-    --culoare3: #153859;
-    --culoare4: #12414F;
+    --background-white: #f5f5f5;
+    --text-black: black;
+    --text-white: white;
+    --background-color: #131E42;
+    --complement1: #24124f;
+    --complement2: #151559;
+    --complement3: #153859;
+    --complement4: #12414F;
+    --spacing: 50px;
+    --padding: 10px;
+    --margin: 10px;
 }
 
 body.dark {
-    --culoare-fundal: #000000;
-    --culoare-text: white;
+    --background-negru: #000000;
+    --text-white: white;
 }
 
 /*variabile vizibile la nivel de arbore body */
@@ -51,63 +71,228 @@ body.dark {
 
 body {
     /* background-color: rgb(255, 255, 255); */
-    background-color: var(--culoare-fundal);
-    color: var(--culoare-text);
+    background-color: var(--background-white);
+    color: var(--text-black);
+    margin: 0;
+    padding-left: var(--spacing);
+    padding-right: var(--spacing);
+    min-width: 400px;
 }
+
+h1 {
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 2em;
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+#logo {
+    width: 30px;
+    height: 30px;
+}
+
+figure {
+    margin: 0;
+}
+
+#banner {
+    width: 100%;
+    height: 100%;
+}
+
+iframe {
+    height: 315px;
+    width: 100%;
+    max-width: 560px;
+
+}
+
 
 #grid-pagina {
     display: grid;
-    grid-template-areas: "z-welcome z-welcome z-welcome"
-        "z-produse z-produse z-promotii"
-        "z-fig1 z-orar z-orar"
-        "z-fig2 z-orar z-orar"
-        "z-fig3 z-orar z-orar"
-        "z-anunturi z-anunturi z-anunturi"
-        "z-index-intrebari z-index-intrebari z-index-intrebari";
+    grid-template-columns: repeat(3, fr);
+    grid-template-areas:
+        "z-prezentare z-prezentare z-prezentare"
+        "z-calendar z-tabel z-anunturi"
+        "z-lista z-tabel z-anunturi"
+        "z-lista z-statistici z-site"
+        "z-altele z-altele z-altele";
+    /* column-gap: 50px;
+    row-gap: 50px; */
+    gap: 25px 10px;
 
 }
 
-#grid-pagina>section,
-#grid-pagina>figure {
-    border: 1px solid black;
-    padding: 10px;
-    margin: 10px;
-    background-color: var(--roz-deschis);
-    color: var(--culoare-text);
+#grid-pagina>section {
+    padding: var(--padding);
+    border: 10px solid var(--complement2);
 }
 
-#welcome {
-    grid-area: z-welcome;
+img {
+    width: 100%;
+    height: auto;
 }
 
-#promotii {
-    grid-area: z-promotii;
+header {
+    border: 10px solid var(--complement2);
+    padding-left: var(--padding);
+    padding-right: var(--padding);
+    margin-left: calc(-1 * var(--spacing));
+    margin-right: calc(-1 * var(--spacing));
 }
 
-#produse {
-    grid-area: z-produse;
+footer {
+    border: 10px solid var(--complement2);
+    padding-left: var(--padding);
+    padding-right: var(--padding);
+    margin-top: var(--margin);
 }
 
-#orar {
-    grid-area: z-orar;
+#Descriere {
+    grid-area: z-prezentare;
 }
 
-#fig1 {
-    grid-area: z-fig1;
+#zona-2 {
+    grid-area: z-tabel;
 }
 
-#fig2 {
-    grid-area: z-fig2;
+#zona-3 {
+    grid-area: z-calendar;
 }
 
-#fig3 {
-    grid-area: z-fig3;
-}
-
-#anunturi {
+#zona-4 {
     grid-area: z-anunturi;
 }
 
-#index-intrebari {
-    grid-area: z-index-intrebari;
+#zona-5 {
+    grid-area: z-lista;
+}
+
+#zona-6 {
+    grid-area: z-statistici;
+}
+
+#zona-7 {
+    grid-area: z-site;
+}
+
+#zona-8 {
+    grid-area: z-altele;
+    padding: var(--padding);
+    border: 10px solid var(--complement2);
+}
+
+/* media query se pune sub codul general pentru ca exista efectul de cascada */
+@media screen and (max-width: 600px) {
+    #grid-pagina {
+        grid-template-areas: "z-prezentare"
+            "z-calendar"
+            "z-tabel"
+            "z-anunturi"
+            "z-lista"
+            "z-statistici"
+            "z-site"
+            "z-altele";
+    }
+}
+
+
+.container-iframe {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.taburi-iframe {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.taburi-iframe a {
+    text-decoration: none;
+    color: var(--text-white);
+    background-color: var(--background-color);
+    padding: 10px;
+    width: 100px;
+    height: 25px;
+    margin-bottom: 2px;
+    margin-top: 2.5px;
+    margin-left: 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    transition: width 0.5s;
+    outline: double 3px var(--complement2);
+}
+
+.taburi-iframe a:hover {
+    background-color: var(--complement3);
+    width: 115px;
+}
+
+#ifr-video {
+    border: inset 5px var(--complement2);
+}
+
+#z2table {
+    border: inset 5px var(--complement2);
+    border-collapse: collapse;
+    width: 100%;
+    caption-side: bottom;
+}
+
+#z2table td {
+    text-align: center;
+    color: var(--text-black);
+}
+
+#z2table th {
+    border: 1px solid var(--text-black);
+    background-color: var(--complement3);
+}
+
+
+
+#z2table caption {
+    color: var(--text-white);
+    font-size: 1.5em;
+    font-weight: bold;
+    border: 3px solid var(--complement2);
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: var(--complement1);
+}
+
+
+#z2table tr:nth-child(even) {
+    border-bottom: 1px solid var(--complement4);
+}
+
+/*c1*/
+
+#z2table tr:nth-child(odd) {
+    border-bottom: 1px solid var(--complement1);
+}
+
+/*c2*/
+
+#z2table td {
+    border: 1px solid var(--complement1);
+}
+
+#z2table tr {
+    transition: all 0.5s ease;
+}
+
+#z2table tr:hover {
+    border: 5px solid var(--complement1);
+    border-color: rgba(36, 18, 79, 0.7);
+
 }

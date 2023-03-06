@@ -1,0 +1,21 @@
+body {
+    --spacing: 20px;
+    --padding: 7px;
+}
+
+html {
+    font-size: 14px;
+}
+
+#grid-pagina {
+    grid-template-columns: 1fr 1fr;
+    /* 3 coloane, trebuie suprascrisa daca avem --> sau repeat(2,fr) */
+    grid-template-areas: "z-prezentare z-prezentare"
+        "z-calendar z-tabel "
+        "z-lista z-tabel "
+        "z-lista z-statistici"
+        "z-anunturi z-site"
+        "z-altele z-altele ";
+    /* column-gap: 50px;
+    row-gap: 50px; */
+}

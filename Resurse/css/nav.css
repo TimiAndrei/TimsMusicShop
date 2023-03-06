@@ -1,0 +1,149 @@
+#menulogo,
+#ch-menu {
+    display: none;
+}
+
+body {
+    --menu-height: 50px;
+    --button-width: 200px;
+    --menu-background: var(--complement4);
+    --button-border: black;
+    --menu-text-color: white;
+}
+
+nav {
+    margin: 0;
+    padding: 0;
+    /* width: calc(100vw - 15px); */
+    background-color: var(--menu-background);
+    height: var(--menu-height);
+    position: sticky;
+    top: 0;
+    margin-right: calc(-1*var(--spacing));
+    margin-left: calc(-1*var(--spacing));
+    z-index: 1;
+}
+
+ul.menu {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+/* permite elementelor sa vina pe un rand sau pe o coloana( se comporta ca un block in cazul de coloana) */
+
+ul.menu li {
+    --border-menu: 2px;
+    width: var(--button-width);
+    height: var(--menu-height);
+    background-color: var(--menu-background);
+    overflow: hidden;
+    text-align: center;
+    border: var(--border-menu) solid var(--button-border);
+    /* float: left; de obicei pentru imagini */
+    /* display: inline-block; sunt vazute ca si caractere mari */
+    box-sizing: border-box;
+    /* pentru a nu se suprapune marginile */
+    list-style-type: none;
+    transition: all 0.5s linear;
+}
+
+ul.menu li a,
+ul.menu li div {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: var(--menu-text-color);
+    line-height: calc(var(--menu-height) - 3 * var(--border-menu));
+    /*pentru a alinia textul la mijloc */
+    font-weight: bold;
+
+}
+
+ul.menu ul {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    opacity: 0;
+    transition: all 0.5s linear;
+    transform: scale(1, 0);
+    transform-origin: center top;
+}
+
+/* ul.menu li:nth-child(odd) {
+    background-color: var(--culoare1);
+}
+
+ul.menu li:nth-child(even) {
+    background-color: var(--culoare2);
+} */
+
+
+ul.menu li:hover {
+    overflow: visible;
+    background-color: var(--complement3);
+
+}
+
+ul.menu li:hover ul {
+    opacity: 1;
+    transform: scale(1, 1);
+}
+
+.disnone {
+    display: none;
+}
+
+#outer {
+    position: fixed;
+    border: 5px solid var(--complement3);
+    border-radius: 100%;
+    border-top: 0;
+    border-bottom: 0;
+    width: 75px;
+    height: 75px;
+    bottom: 0;
+    right: 0;
+}
+
+#inner {
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid rgba(36, 18, 79, 0.7);
+    margin: auto;
+    margin-top: 30%;
+    transition: all 0.3s linear;
+}
+
+#outer:hover #inner {
+    border-bottom: 20px solid var(--complement1);
+    transform: translateY(-10px);
+}
+
+#back-to-top {
+    color: var(--text-black);
+    text-decoration: none;
+}
+
+#inner::before {
+    content: attr(data-tooltip);
+    display: none;
+    position: absolute;
+    bottom: -40px;
+    transform: translateX(-45%);
+    border-radius: 3px;
+    background-color: black;
+    color: white;
+    opacity: 0.7;
+    width: 80px;
+}
+
+#inner:hover::before {
+    display: block;
+}
