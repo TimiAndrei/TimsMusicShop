@@ -8,6 +8,18 @@ p {
     margin: 1em;
 }
 
+b {
+    font-weight: bolder;
+}
+
+strong {
+    font-weight: bolder;
+}
+
+i {
+    font-style: italic;
+}
+
 h1,
 h2,
 h3,
@@ -51,6 +63,7 @@ body {
     --background-white: #f5f5f5;
     --text-black: black;
     --text-white: white;
+    --text-red: red;
     --background-color: #131E42;
     --complement1: #24124f;
     --complement2: #151559;
@@ -230,6 +243,7 @@ footer {
     border-bottom-left-radius: 0;
     transition: width 0.5s;
     outline: double 3px var(--complement2);
+
 }
 
 .taburi-iframe a:hover {
@@ -295,4 +309,22 @@ footer {
     border: 5px solid var(--complement1);
     border-color: rgba(36, 18, 79, 0.7);
 
+}
+
+#reducere {
+    height: 3em;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#nota {
+    font-family: 'Tangerine', serif;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: var(--text-red);
+}
+
+#procentaj {
+    font-style: italic;
+    font-size: 1.2em;
 }
