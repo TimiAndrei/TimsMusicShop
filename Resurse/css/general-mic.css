@@ -3,8 +3,14 @@ body {
     --padding: 5px;
 }
 
+body * {
+    transition: none;
+    animation: none;
+}
+
 html {
-    font-size: 12px;
+    font-size: 14px;
+    transition: all 0.3s ease;
 }
 
 #grid-pagina {

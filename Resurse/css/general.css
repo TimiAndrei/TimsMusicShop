@@ -35,7 +35,7 @@ h6 {
 }
 
 html {
-    font-size: 16px;
+    font-size: 20px;
 }
 
 ul {
@@ -234,7 +234,7 @@ footer {
     padding: 10px;
     width: 100px;
     height: 25px;
-    margin-bottom: 2px;
+    margin-bottom: 3px;
     margin-top: 2.5px;
     margin-left: 0;
     border-top-right-radius: 5px;
@@ -327,4 +327,137 @@ footer {
 #procentaj {
     font-style: italic;
     font-size: 1.2em;
+}
+
+#banner {
+    display: none;
+}
+
+@media print {
+
+    #Special {
+        page-break-after: always;
+        margin-top: 50%;
+        text-align: center;
+        margin-left: 1cm;
+    }
+
+    #grid-pagina {
+        font-size: 10px;
+        box-sizing: border-box;
+        page-break-before: always;
+        background-color: white;
+        /*
+			grid-template-rows: calc(100vh - 10px) 100vh 100vh 100vh;*/
+
+        display: block;
+    }
+
+    html,
+    body {
+        width: 210mm;
+        /* height: 297mm; */
+        /*height: 282mm;*/
+        overflow: visible !important;
+    }
+
+    #grid-pagina div:nth-child(5) {
+
+        page-break-before: always;
+    }
+
+
+    #watermark {
+        display: block;
+        position: fixed;
+        /*apare pe toate paginile*/
+        bottom: 0;
+        color: rgba(0, 0, 0);
+        right: 0;
+    }
+
+    #watermark::after {
+
+        opacity: 0.4;
+        padding: 5px;
+        height: 1cm;
+        width: 4cm;
+        line-height: 1cm;
+        display: block;
+        background: white;
+        border: 2px solid black;
+        border-top-left-radius: 10px;
+        border-bottom-left-radius: 10px;
+        border-right: none;
+        content: "Copyright Andrei Timotei";
+    }
+
+    #end {
+        page-break-before: always;
+    }
+
+    img,
+    video,
+    iframe,
+    #outer,
+    #inner,
+    nav,
+    link,
+    .taburi-iframe {
+        display: none;
+    }
+
+    #banner {
+        display: block;
+        border: 5px solid black;
+        height: 30px;
+        width: 70%;
+        margin: 0;
+        position: absolute;
+        bottom: 0;
+        text-align: center;
+        line-height: 30px;
+    }
+
+    header {
+        border: none;
+    }
+
+    #Oferte {
+        border: none;
+    }
+
+    #grid-pagina>section {
+        border: none;
+    }
+
+    #zona-8 {
+        border: none;
+    }
+
+    footer {
+        border: none;
+    }
+}
+
+
+
+@page {
+    size: A4 portrait;
+    margin-bottom: 2cm;
+    margin-top: 2cm;
+    counter-increment: page;
+
+}
+
+@page: left {
+
+    margin-left: 3cm;
+    margin-right: 1cm;
+}
+
+@page: right {
+
+    margin-right: 3cm;
+    margin-left: 1cm;
 }

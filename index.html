@@ -27,16 +27,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine"> <!-- fontul Tangerine-->
 
     <script src="https://kit.fontawesome.com/4a102f1d9e.js" crossorigin="anonymous"></script>
-
     <link rel="stylesheet" href="resurse/css/reset.css" type="text/css">
-
     <link rel="stylesheet" href="resurse/css/general.css" type="text/css">
-
     <link rel="stylesheet" href="resurse/css/general-mediu.css" type="text/css" media="screen and (max-width:1000px)">
-
     <link rel="stylesheet" href="resurse/css/general-mic.css" type="text/css" media="screen and (max-width:600px)">
-
     <link rel="stylesheet" href="resurse/css/nav.css" type="text/css">
+    <link rel="stylesheet" href="resurse/css/nav-mediu.css" type="text/css" media="screen and (max-width:1000px)">
+    <link rel="stylesheet" href="resurse/css/nav-mic.css" type="text/css" media="screen and (max-width:600px)">
 
 </head>
 
@@ -49,16 +46,19 @@
     </header>
     <!-- cerinta 5, sistemul de navigare in pagina acasa (navigarea secundară), dar si pentru celelalte pagini ale site-ului (navigarea principală)-->
     <nav>
-        <label id="menulogo" for="ch-menu">
-            <img src="Resurse/Imagini/logo.jpg" alt="menu" height="30">
+        <label id="hamburger" for="ch-menu">
+            <img src="Resurse/Imagini/Hamburger_icon_alb.png" alt="menu">
         </label>
         <input id="ch-menu" type="checkbox">
         <ul class="menu">
             <li>
-                <div>Acasă</div>
+                <div id="acasa">Acasă</div>
+                <div id="acasa-mediu"><i class="fa-solid fa-house"></i></div>
                 <ul>
-                    <li><a href="#Descriere">Descriere</a></li>
-                    <li><a href="#Oferte">Oferte</a>
+                    <li><a href="#Descriere">
+                            <span class="arrow">→</span>Descriere
+                        </a></li>
+                    <li><a href="#Oferte"><span class="arrow">→</span>Oferte</a>
                         <ul class="disnone">
                             <li><a href="#Oferte_incepatori">Oferte pentru începători</a></li>
                             <li><a href="#Oferte_avansati">Oferte pentru avansați</a></li>
@@ -310,6 +310,8 @@
                 <div id="inner" data-tooltip="Back to Top"></div>
             </a>
         </div>
+        <div id="watermark">
+        </div>
     </main>
     <footer>
         <h1 style="font-size:small;">Tim's Music Shop contact: </h1>
@@ -321,6 +323,7 @@
             <a href="wa.link/rryahp">Link whatsapp</a>
         </address>
         <small>Copyright &copy; <time datetime="2023-02-27">27 februarie 2023</time></small>
+        <div id="banner"> Acesta este un proiect scolar !</div>
     </footer>
 
 </body> <!-- cerinta 7, s-au folosit tagurile <p> si <ul>|| cerinta 4, impartirea body-ului -->

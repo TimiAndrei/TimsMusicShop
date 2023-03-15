@@ -1,0 +1,12 @@
+body {
+    --menu-height: 40px;
+    --button-width: 150px;
+}
+
+#acasa-mediu {
+    display: block;
+}
+
+#acasa {
+    display: none;
+}
