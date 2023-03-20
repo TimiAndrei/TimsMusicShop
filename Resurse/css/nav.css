@@ -167,3 +167,7 @@ a:hover .arrow {
     display: block;
     transform: translateX(100%);
 }
+
+.hamburger-menu {
+    display: none;
+}

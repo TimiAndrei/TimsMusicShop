@@ -1,0 +1,5 @@
+@for $a from 3 through 1 {
+    #hamburger div:nth-child(#{$a}) {
+        animation-delay: 1s - 0.3 * $a;
+    }
+}

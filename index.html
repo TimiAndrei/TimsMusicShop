@@ -46,31 +46,41 @@
     </header>
     <!-- cerinta 5, sistemul de navigare in pagina acasa (navigarea secundară), dar si pentru celelalte pagini ale site-ului (navigarea principală)-->
     <nav>
-        <label id="hamburger" for="ch-menu">
+        <!-- <label id="hamburger" for="ch-menu">
             <img src="Resurse/Imagini/Hamburger_icon_alb.png" alt="menu">
         </label>
-        <input id="ch-menu" type="checkbox">
-        <ul class="menu">
-            <li>
-                <div id="acasa">Acasă</div>
-                <div id="acasa-mediu"><i class="fa-solid fa-house"></i></div>
-                <ul>
-                    <li><a href="#Descriere">
-                            <span class="arrow">→</span>Descriere
-                        </a></li>
-                    <li><a href="#Oferte"><span class="arrow">→</span>Oferte</a>
-                        <ul class="disnone">
-                            <li><a href="#Oferte_incepatori">Oferte pentru începători</a></li>
-                            <li><a href="#Oferte_avansati">Oferte pentru avansați</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-            <li><a href="instrumente_cu_clape.html">Instrumente cu clape</a></li>
-            <li><a href="instrumente_cu_coarde.html">Instrumente cu coarde</a></li>
-            <li><a href="instrumente_de_suflat.html">Instrumente de suflat</a></li>
-            <li><a href="accesorii.html">Accesorii</a></li>
-        </ul>
+        <input id="ch-menu" type="checkbox"> ->varianta cu imagine -->
+        <div id="menu-wrapper">
+            <label id="hamburger" for="ch-menu">
+                <div class="hamburger-menu">
+                    <div id="linie-top"></div>
+                    <div id="linie-mid"></div>
+                    <div id="linie-bot"></div>
+                </div>
+            </label>
+            <input id="ch-menu" type="checkbox">
+            <ul class="menu">
+                <li>
+                    <div id="acasa">Acasă</div>
+                    <div id="acasa-mediu"><i class="fa-solid fa-house"></i></div>
+                    <ul>
+                        <li><a href="#Descriere">
+                                <span class="arrow">→</span>Descriere
+                            </a></li>
+                        <li><a href="#Oferte"><span class="arrow">→</span>Oferte</a>
+                            <ul class="disnone">
+                                <li><a href="#Oferte_incepatori">Oferte pentru începători</a></li>
+                                <li><a href="#Oferte_avansati">Oferte pentru avansați</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="instrumente_cu_clape.html">Instrumente cu clape</a></li>
+                <li><a href="instrumente_cu_coarde.html">Instrumente cu coarde</a></li>
+                <li><a href="instrumente_de_suflat.html">Instrumente de suflat</a></li>
+                <li><a href="accesorii.html">Accesorii</a></li>
+            </ul>
+        </div>
     </nav>
     <main id="grid-pagina">
         <section id="Descriere">

@@ -329,10 +329,6 @@ footer {
     font-size: 1.2em;
 }
 
-#banner {
-    display: none;
-}
-
 @media print {
 
     #Special {
