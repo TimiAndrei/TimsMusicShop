@@ -1,0 +1,276 @@
+<!DOCTYPE html> <!-- tipul documentului, html, cerinta 1-->
+
+<html lang="ro"> <!-- limbajul paginii, cerinta 1 -->
+
+<head>
+    <title>Tim's Music Shop</title> <!-- titlu corespunzator al paginii, cerinta 2 -->
+    <!-- /* fara viewport nu merg media queries */ -->
+    <meta name="keywords"
+        content="magazin de muzică, instrumente cu clape, instrumente cu coarde, instrumente de suflat, muzică, instrumente, orgă, pian, pianină, vioară, violă, contrabas, chitară, mandolină, fluier, flaut, trompetă, trombon, ofertă instrumente, instrumente muzicale">
+    <meta name="description"
+        content="Tim's Music Shop - Acasa. Magazin de muzica. Instrumente de calitate la cel mai bun pret.">
+    <%- include("../fragmente/head.ejs") %> <!-- includerea fisierului head.ejs -->
+</head>
+
+<%- include("../fragmente/header.ejs") %>
+
+    <body>
+
+        <main id="grid-pagina">
+            <section id="Descriere">
+                <h2>Descriere</h2>
+                <p>
+                    Tim's Music Shop este un <b>magazin de muzică</b>, unde puteți găsi <b>instrumente
+                    </b> de calitate la <b>cel mai bun preț</b>. Avem o gamă variată de instrumente muzicale
+                    <i id="icons" class="fa-solid fa-music fa-beat"></i>
+
+                    <!-- cerinta 10, marcarea sintagmelor/ cuvintelor cheie cu b-->
+                </p>
+                <!-- <p>IP: <%- locals.ip %></p>
+                <p> a+b = <%- locals.a + locals.b %></p> exemplu variabile injectate din js -->
+                <figure id="banner">
+                    <picture>
+                        <source media="(max-width: 600px)" srcset="./Resurse/Imagini/MusicBanner1.jpg">
+                        <source media="(max-width: 1000px)" srcset="./Resurse/Imagini/MusicBanner2.jpg">
+                        <source media="(max-width: 1800px)" srcset="./Resurse/Imagini/MusicBanner3.jpg">
+                        <img src="./Resurse/Imagini/MusicBanner3.jpg" alt="Banner Tim's Music Shop"
+                            title="Music Banner">
+                        <!--<figurecaption>Magazin de muzică</figurecaption>-->
+                    </picture>
+                </figure>
+                <!-- figure e de tip block ! -->
+            </section>
+
+            <section id="zona-2">
+                <h2>Programul magazinului nostru</h2>
+                <p>Puteți interacționa și achiziționa orice produs și doar în mediul online, dar în cazul în care doriți
+                    mai
+                    multe detalii și o încercare fizică a produsului, vă invităm să treceți și pe la magazinul nostru.
+                    Pentru a nu face drumul degeaba, atașăm programul magazinului mai jos.</p>
+                <div id="tabel">
+                    <table id="z2table">
+                        <caption> Program magazin fizic</caption>
+                        <thead>
+                            <tr>
+                                <th>Ziua</th>
+                                <th>Deschidem</th>
+                                <th>Închidem</th>
+                                <th>Angajat 1</th>
+                                <th>Angajat 2</th>
+                                <th>Angajat 3</th>
+                                <th>Angajat 4</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Luni</td>
+                                <td>9:00 am</td>
+                                <td>5:00 pm</td>
+                                <td>John</td>
+                                <td>Lisa</td>
+                                <td>Sarah</td>
+                                <td>James</td>
+                            </tr>
+                            <tr>
+                                <td>Marti</td>
+                                <td>9:00 am</td>
+                                <td>5:00 pm</td>
+                                <td>Lisa</td>
+                                <td>Sarah</td>
+                                <td>James</td>
+                                <td>John</td>
+                            </tr>
+                            <tr>
+                                <td>Miercuri</td>
+                                <td>9:00 am</td>
+                                <td>5:00 pm</td>
+                                <td>Sarah</td>
+                                <td>James</td>
+                                <td>John</td>
+                                <td>Lisa</td>
+                            </tr>
+                            <tr>
+                                <td>Joi</td>
+                                <td>9:00 am</td>
+                                <td>5:00 pm</td>
+                                <td>James</td>
+                                <td>John</td>
+                                <td>Lisa</td>
+                                <td>Sarah</td>
+                            </tr>
+                            <tr>
+                                <td>Vineri</td>
+                                <td>9:00 am</td>
+                                <td>5:00 pm</td>
+                                <td>John</td>
+                                <td>Lisa</td>
+                                <td>Sarah</td>
+                                <td>James</td>
+                            </tr>
+                            <tr>
+                                <td>Sâmbătă</td>
+                                <td>10:00 am</td>
+                                <td>6:00 pm</td>
+                                <td>Lisa</td>
+                                <td>Sarah</td>
+                                <td>James</td>
+                                <td>John</td>
+                            </tr>
+                            <tr>
+                                <td>Duminică</td>
+                                <td>12:00 pm</td>
+                                <td>5:00 pm</td>
+                                <td>Sarah</td>
+                                <td>James</td>
+                                <td>John</td>
+                                <td>Lisa</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td id="reducere" colspan="7">Studenții au reducere <math
+                                        xmlns="http://www.w3.org/1998/Math/MathML">
+
+                                        <mfrac>
+                                            <mn id="nota">Media generala</mn>
+                                            <mn id="procentaj">1.2</mn>
+                                        </mfrac>
+                                    </math>% joi toată ziua.
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+            <section id="zona-3">
+                <h2>Zona 3</h2>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Autem consectetur minima odio soluta omnis
+                    possimus. Modi inventore molestias veniam consequuntur veritatis vero obcaecati! Soluta maiores
+                    numquam
+                    quis dolore, deleniti totam?</p>
+            </section>
+            <section id="zona-4">
+                <h2>Zona 4</h2>
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aut deserunt omnis eaque! Consequatur quos
+                    dicta quibusdam, fuga hic commodi corporis, facere illum sint optio, odio atque dolorem
+                    exercitationem
+                    quidem tempore.</p>
+            </section>
+            <section id="zona-5">
+                <h2>Zona 5</h2>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel, reiciendis optio nulla laborum unde
+                    impedit excepturi consectetur! Delectus et beatae fugit, nisi laudantium fugiat tenetur minus
+                    adipisci
+                    recusandae, maxime ad.</p>
+            </section>
+            <section id="zona-6">
+                <h2>Zona 6</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi quia beatae nulla velit officia dolor
+                    suscipit quaerat perspiciatis eveniet, fugit, cupiditate, neque commodi ducimus earum sequi atque
+                    ratione magnam incidunt!</p>
+            </section>
+            <section id="zona-7">
+                <h2>Zona 7</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi quia beatae nulla velit officia dolor
+                    suscipit quaerat perspiciatis eveniet, fugit, cupiditate, neque commodi ducimus earum sequi atque
+                    ratione magnam incidunt!</p>
+            </section>
+            <div id="zona-8">
+                <p>Descărcați programul magazinului <a href="./Resurse/Imagini/Program.png" download>aici</a></p>
+                <div class="container-iframe">
+                    <iframe id="ifr-video" name="ifr-video" src="https://www.youtube.com/embed/buxY2QDGFIA"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="taburi-iframe">
+                        <a href="https://www.youtube.com/embed/buxY2QDGFIA" target="ifr-video">Prezentare 1</a>
+                        <a href="https://www.youtube.com/embed/PAs9f8OHKZ8" target="ifr-video">Prezentare 2</a>
+                    </div>
+                </div>
+                <div id="lista">
+                    <ul>
+                        <li>Instrumente cu clape
+                            <ul>
+                                <li>Orgă</li>
+                                <li>Acordeon</li>
+                                <li>Pianină</li>
+                                <li>Pian</li>
+                            </ul>
+                        </li>
+                        <li>Instrumente cu coarde
+                            <ul>
+                                <li>Instrumente cu coarde ciupite
+                                    <ul>
+                                        <li>Chitară</li>
+                                        <li>Mandolină</li>
+                                    </ul>
+                                </li>
+                                <li>Instrumente cu coarde frecate
+                                    <ul>
+                                        <li>Vioară</li>
+                                        <li>Violă</li>
+                                        <li>Contrabas</li>
+                                    </ul>
+                                <li>Instrumente de suflat
+                                    <ul>
+                                        <li>Fluier</li>
+                                        <li>Flaut</li>
+                                        <li>Trompetă</li>
+                                        <li>Trombon</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                </div>
+
+
+                <section id="Oferte">
+                    <h2>Oferte</h2>
+                    <p class="oferta">
+                        În perioada aceasta, <strong>(timp limitat)</strong> avem diferite seturi de oferte pentru
+                        instrumente
+                        de calitate la prețuri accesibile.
+                        <a href="https://souqeshop.ro/promotii/" target="blank">Direct promotii</a>
+                    </p> <!-- cerinta 10, atentionare folosind tagul strong-->
+                    <section id="Oferte_incepatori">
+                        <h3> Oferte pentru începători</h3>
+                        <p class="oferta">
+                            Dispunem de oferte atractive pentru produsele recomandate muzicanților de la început de
+                            drum.
+                        </p>
+                        <p class="oferta">
+                            Doar în această perioadă, avem oferte de : <s>15%</s> <ins
+                                style="text-decoration:none;">25%</ins> !
+                        </p> <!-- cerinta 10, folosirea tagurilor <s> si <ins> -->
+                    </section>
+                    <section id="Oferte_avansati">
+                        <h3> Oferte pentru avansați</h3>
+                        <p class="oferta">
+                            Dispunem de asemenea de oferte atractive pentru produsele recomandate muzicanților avansați
+                            pentru a
+                            le oferi un sunet de <b>calitate superioară</b>.
+                        </p>
+                        <p class="oferta">
+                            Doar în această perioadă, avem oferte de : <s>10%</s> <ins
+                                style="text-decoration:none;">20%</ins> !
+                        </p>
+                    </section>
+                </section><!-- cerinta 6, folosirea section imbricat, cu heading-urile corespunzătoare-->
+            </div>
+            <div id="outer">
+                <a id="back-to-top" href="#">
+                    <div id="inner" data-tooltip="Back to Top"></div>
+                </a>
+            </div>
+            <div id="watermark">
+            </div>
+        </main>
+
+        <%- include("../fragmente/footer.ejs") %>
+    </body> <!-- cerinta 7, s-au folosit tagurile <p> si <ul>|| cerinta 4, impartirea body-ului -->
+
+</html>
+
+<!-- cerinta 9, pagina contine toate cuvintele cheie mentionate in head-->
