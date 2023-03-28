@@ -122,7 +122,8 @@ iframe {
     height: 315px;
     width: 100%;
     max-width: 560px;
-
+    min-width: auto;
+    min-height: auto;
 }
 
 
@@ -329,131 +330,60 @@ footer {
     font-size: 1.2em;
 }
 
-@media print {
+video {
+    max-width: 700px;
+    max-height: 350px;
+    width: auto;
+    height: auto;
+    min-height: 200px;
+    min-width: 250px;
+}
 
-    #Special {
-        page-break-after: always;
-        margin-top: 50%;
-        text-align: center;
-        margin-left: 1cm;
-    }
+::cue {
+    background-color: rgba(255, 255, 255, 0.3);
+}
 
-    #grid-pagina {
-        font-size: 10px;
-        box-sizing: border-box;
-        page-break-before: always;
-        background-color: white;
-        /*
-			grid-template-rows: calc(100vh - 10px) 100vh 100vh 100vh;*/
+::cue {
+    color: var(--complement2);
+}
 
-        display: block;
-    }
+video::cue:first-of-type {
+    text-align: center;
+    display: block;
+    margin-left: 200px;
+}
 
-    html,
-    body {
-        width: 210mm;
-        /* height: 297mm; */
-        /*height: 282mm;*/
-        overflow: visible !important;
-    }
-
-    #grid-pagina div:nth-child(5) {
-
-        page-break-before: always;
-    }
-
-
-    #watermark {
-        display: block;
-        position: fixed;
-        /*apare pe toate paginile*/
-        bottom: 0;
-        color: rgba(0, 0, 0);
-        right: 0;
-    }
-
-    #watermark::after {
-
-        opacity: 0.4;
-        padding: 5px;
-        height: 1cm;
-        width: 4cm;
-        line-height: 1cm;
-        display: block;
-        background: white;
-        border: 2px solid black;
-        border-top-left-radius: 10px;
-        border-bottom-left-radius: 10px;
-        border-right: none;
-        content: "Copyright Andrei Timotei";
-    }
-
-    #end {
-        page-break-before: always;
-    }
-
-    img,
-    video,
-    iframe,
-    #outer,
-    #inner,
-    nav,
-    link,
-    .taburi-iframe {
-        display: none;
-    }
-
-    #banner {
-        display: block;
-        border: 5px solid black;
-        height: 30px;
-        width: 70%;
-        margin: 0;
-        position: absolute;
-        bottom: 0;
-        text-align: center;
-        line-height: 30px;
-    }
-
-    header {
-        border: none;
-    }
-
-    #Oferte {
-        border: none;
-    }
-
-    #grid-pagina>section {
-        border: none;
-    }
-
-    #zona-8 {
-        border: none;
-    }
-
-    footer {
-        border: none;
-    }
+a {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 0%;
 }
 
 
-
-@page {
-    size: A4 portrait;
-    margin-bottom: 2cm;
-    margin-top: 2cm;
-    counter-increment: page;
-
+a.link:hover {
+    background-size: 100%;
+    color: var(--complement2);
+    background-image: radial-gradient(#02979c85 40%, #8fd5cf00 80%, #8fd5cf00 100%);
+    background-size: 100%;
+    transition: all 1s linear;
 }
 
-@page: left {
 
-    margin-left: 3cm;
-    margin-right: 1cm;
+a.link:active {
+    border: 1px solid var(--complement3);
+    color: var(--text-white);
+    transition: all 0.5s linear;
 }
 
-@page: right {
-
-    margin-right: 3cm;
-    margin-left: 1cm;
+a.link[href^="http"]::before {
+    content: "⮳";
+    font-size: 1.5rem;
 }
+
+a.link[href^="http"]:hover::before {
+    color: var(--background-negru);
+    transition: color 0.35s linear;
+}
+
+
+/* pentru traduceri */

@@ -21,6 +21,13 @@
             "imagine": "interzis.png"
         },
         {
+            "identificator": 400,
+            "status": true,
+            "titlu": "400 - Bad request!",
+            "text": "Ai greșit ceva în URL. Verifică și mai încearcă!",
+            "imagine": "interzis.png"
+        },
+        {
             "identificator": 1,
             "status": false,
             "titlu": "Site în lucru",
