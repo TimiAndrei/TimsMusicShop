@@ -2,6 +2,7 @@ const express = require("express");
 // require e ca un import din C (express e o biblioteca, dar e un fel de obiect)
 const fs = require("fs"); // fs e biblioteca de file system
 const path = require("path");
+const sharp = require("sharp");
 
 obGlobal = {
     obErori: null,
@@ -34,7 +35,7 @@ app.get("/favicon.ico", function (req, res) {
 
 
 app.get(["/index", "/", "/home"], function (req, res) {
-    res.render("pagini/index", { ip: req.ip, a: 10, b: 20 });
+    res.render("pagini/index", { ip: req.ip, a: 10, b: 20, imagini: obGlobal.obImagini.imagini });
 }); //render - compileaza ejs-ul si il trimite catre client
 // render stie ca e folosit pentru template, si se uita in views (folderul default)
 app.get("/despre", function (req, res) {
@@ -100,7 +101,46 @@ function initErori() {
 }
 
 initErori();
+// #########################################################################
+// function initImagini() {
+//     var continut = fs.readFileSync(__dirname + "/Resurse/json/galerie.json").toString("utf-8");
+//     obGlobal.obImagini = JSON.parse(continut);
+//     let vImagini = obGlobal.obImagini.imagini;
+//     let caleAbs = path.join(__dirname, obGlobal.obImagini.cale_baza);
+//     let caleAbsMediu = path.join(caleAbs, "mediu");
+//     if (!fs.existsSync(caleAbsMediu))
+//         fs.mkdirSync(caleAbsMediu);
+//     for (let imag of vImagini) { //echivalent cu iteratorul din C++
+//         [numeFis, ext] = imag.nume.split(".");
+//         imag.fisier_mediu = "/" + path.join(obGlobal.obImagini.cale_galerie, "mediu", numeFis + ".webp");
+//         let caleAbsFisMediu = path.join(__dirname, imag.fisier_mediu);
+//         sharp(path.join(caleAbs, imag.fisier)).resize(400).toFile(caleAbsFisMediu);
 
+//         imag.fisier = "/" + path.join(obGlobal.obImagini.cale_galerie, imag.fisier);
+//     }
+// }
+
+function initImagini() {
+    var continut = fs.readFileSync(path.join(__dirname, "/resurse/json/galerie.json")).toString("utf-8");
+    obGlobal.obImagini = JSON.parse(continut);
+    let vImagini = obGlobal.obImagini.imagini;
+    let caleAbs = path.join(__dirname, obGlobal.obImagini.cale_galerie);
+    let caleAbsMediu = path.join(caleAbs, "mediu");
+
+    if (!fs.existsSync(caleAbsMediu))
+        fs.mkdirSync(caleAbsMediu);
+
+    for (let imag of vImagini) {
+        [nume_fisier, extensie] = imag.fisier.split(".");
+        imag.fisier_mediu = "/" + path.join(obGlobal.obImagini.cale_galerie, "mediu", nume_fisier + "_mediu" + ".webp");
+        let caleAbsFisMediu = path.join(__dirname, imag.fisier_mediu);
+        sharp(path.join(caleAbs, imag.fisier)).resize(400).toFile(caleAbsFisMediu);
+
+        imag.fisier = "/" + path.join(obGlobal.obImagini.cale_galerie, imag.fisier);
+    }
+}
+
+initImagini();
 //function afiseazaEroare(res, _identificator, _titlu =, _text, _imagine = {}) //trimitere ca obiect ( destructuring ) 
 //name parameters mai sus, si mai jos parametrii default 
 function afiseazaEroare(res, _identificator, _titlu = "titlu default", _text, _imagine) {

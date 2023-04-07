@@ -164,9 +164,25 @@
             </section>
             <section id="zona-6">
                 <h2>Zona 6</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quasi quia beatae nulla velit officia dolor
-                    suscipit quaerat perspiciatis eveniet, fugit, cupiditate, neque commodi ducimus earum sequi atque
-                    ratione magnam incidunt!</p>
+                <div id="grid-galerie">
+                    <% for (let imag of locals.imagini) { d=new Date(); d.getMonth(); var
+                        v_luni=["ianuarie", "februarie" , "martie"
+                        ,"aprilie","mai","iunie","iulie","august", "septembrie" ,"octombrie","noiembrie","decembrie"];
+                        if(imag.luni && imag.luni.includes(v_luni[d.getMonth()])) { %>
+
+                        <figure>
+                            <picture>
+                                <source srcset="<%- imag.fisier_mediu %>" media="(max-width:1000px)" />
+                                <img src="<%- imag.fisier %>" alt="imagine">
+                            </picture>
+                            <figcaption><%- imag.descriere %></figcaption>
+                        </figure>
+                        <% } %>
+                            <% } %>
+                </div>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere cum eum libero distinctio mollitia
+                    beatae hic, quae corrupti molestiae obcaecati amet voluptatum nisi neque necessitatibus, iure
+                    repudiandae aliquid inventore culpa!</p>
             </section>
             <section id="zona-7">
                 <h2>Zona 7</h2>
