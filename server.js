@@ -3,18 +3,38 @@ const express = require("express");
 const fs = require("fs"); // fs e biblioteca de file system
 const path = require("path");
 const sharp = require("sharp");
+const sass = require("sass");
+const { Client } = require("pg"); //destructuring
+
+var client = new Client({
+    database: "musicshopdb",
+    user: "timi",
+    password: "pa55word",
+    host: "localhost",
+    port: 5432,
+});
+client.connect();
+
+client.query("select * from lab8_12", function (err, rez) {
+    console.log("Eroare BD", err);
+
+    console.log("Rezultat BD", rez.rows);
+});
 
 obGlobal = {
     obErori: null,
-    obImagini: null
+    obImagini: null,
+    folderScss: path.join(__dirname, "Resurse", "scss"),
+    folderCss: path.join(__dirname, "Resurse", "css"),
+    folderBackup: path.join(__dirname, "Resurse/backup"),
 }; // obiect global
 
 
 app = express();
 
-console.log("Folder proiect: ", __dirname);
-console.log("Cale fisier: ", __filename);
-console.log("Director de lucru: ", process.cwd());
+// console.log("Folder proiect: ", __dirname);
+// console.log("Cale fisier: ", __filename);
+// console.log("Director de lucru: ", process.cwd());
 
 app.set("view engine", "ejs"); // motor de template 
 // app.set trebuie pus inainte de get-uri 
@@ -22,10 +42,11 @@ app.set("view engine", "ejs"); // motor de template
 app.use("/Resurse", express.static(__dirname + "/Resurse"));
 // express.static e o functie care returneaza un obiect
 // asa "livrez" resursele pentru site 
-
+app.use("/node_modules", express.static(__dirname + "/node_modules"));
 app.use(/^\/Resurse(\/[a-zA-Z0-9]*(?!\.)[a-zA-Z0-9]*)*$/, function (req, res) {
     afiseazaEroare(res, 403);
 })
+
 
 app.get("/favicon.ico", function (req, res) {
     res.sendFile(__dirname + "/Resurse/Imagini/favicon.ico");
@@ -51,7 +72,7 @@ app.get("/*.ejs", function (req, res) {//wildcard pentru a verifica daca fisiere
     afiseazaEroare(res, 400);
 });
 
-vectorFoldere = ["temp", "temp1"]
+vectorFoldere = ["temp", "temp1", "backup"]
 
 for (let folder of vectorFoldere) {
     // let cale_folder = __dirname + "/" + folder;
@@ -61,9 +82,48 @@ for (let folder of vectorFoldere) {
         fs.mkdirSync(cale_folder);
 } // creeaza folderele daca nu exista deja 
 
+function compileazaCss(caleScss, caleCss) {
+    if (!caleCss) {
+        let vectorCale = caleScss.split("\\");
+        let numeFisierExtensie = vectorCale[vectorCale.length - 1];
+        let numeFisier = numeFisierExtensie.split(".")[0]; // a.scss->[("a"), ("scss")]
+        caleCss = numeFisier + ".css";
+    }
+    if (!path.isAbsolute(caleScss))
+        caleScss = path.join(obGlobal.folderScss, caleScss);
+    if (!path.isAbsolute(caleCss))
+        caleCss = path.join(obGlobal.folderCss, caleCss);
+
+    //LA ACEST PUNCT AVEM CAI ABSOLUTE IN CALESCSS SI FOLDER
+    let vectorCale = caleScss.split("\\");
+    let numeFisCss = vectorCale[vectorCale.length - 1];
+    if (fs.existsSync(caleCss)) {
+        fs.copyFileSync(caleCss, path.join(obGlobal.folderBackup, numeFisCss));
+    }
+    rez = sass.compile(caleScss, { "sourceMap": true });
+    fs.writeFileSync(caleCss, rez.css);
+    // console.log("Compilare css: ", rez);
+
+}
+
+
+vFisiere = fs.readdirSync(obGlobal.folderScss); //da vector de stringuri cu numele fisierelor
+for (let numeFis of vFisiere) {
+    if (path.extname(numeFis) == ".scss")
+        compileazaCss(numeFis);
+}
+
+fs.watch(obGlobal.folderScss, function (eveniment, numeFis) {
+    // console.log(eveniment, numeFis);
+    if (eveniment == "change" || eveniment == "rename") {
+        let caleCompleta = path.join(obGlobal.folderScss, numeFis);
+        if (fs.existsSync(caleCompleta))
+            compileazaCss(caleCompleta);
+    }
+})
 app.get("/*", function (req, res) {
     try {
-        console.log(req.url);
+        // console.log(req.url);
         res.render("pagini" + req.url, function (err, rezRandare) {
             if (err) {
                 if (err.message.startsWith("Failed to lookup view"))
@@ -73,7 +133,7 @@ app.get("/*", function (req, res) {
                     afiseazaEroare(res);
             }
             else {
-                console.log(rezRandare);
+                //console.log(rezRandare);
                 res.send(rezRandare);
             }
         });
