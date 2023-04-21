@@ -13,13 +13,13 @@ var client = new Client({
     host: "localhost",
     port: 5432,
 });
-client.connect();
+// client.connect();
 
-client.query("select * from lab8_12", function (err, rez) {
-    console.log("Eroare BD", err);
+// client.query("select * from lab8_12", function (err, rez) {
+//     console.log("Eroare BD", err);
 
-    console.log("Rezultat BD", rez.rows);
-});
+//     console.log("Rezultat BD", rez.rows);
+// });
 
 obGlobal = {
     obErori: null,
@@ -53,7 +53,6 @@ app.get("/favicon.ico", function (req, res) {
 });
 
 // ejs e pentru a include cod html in alte fisiere html
-
 
 app.get(["/index", "/", "/home"], function (req, res) {
     res.render("pagini/index", { ip: req.ip, a: 10, b: 20, imagini: obGlobal.obImagini.imagini });
@@ -161,24 +160,6 @@ function initErori() {
 }
 
 initErori();
-// #########################################################################
-// function initImagini() {
-//     var continut = fs.readFileSync(__dirname + "/Resurse/json/galerie.json").toString("utf-8");
-//     obGlobal.obImagini = JSON.parse(continut);
-//     let vImagini = obGlobal.obImagini.imagini;
-//     let caleAbs = path.join(__dirname, obGlobal.obImagini.cale_baza);
-//     let caleAbsMediu = path.join(caleAbs, "mediu");
-//     if (!fs.existsSync(caleAbsMediu))
-//         fs.mkdirSync(caleAbsMediu);
-//     for (let imag of vImagini) { //echivalent cu iteratorul din C++
-//         [numeFis, ext] = imag.nume.split(".");
-//         imag.fisier_mediu = "/" + path.join(obGlobal.obImagini.cale_galerie, "mediu", numeFis + ".webp");
-//         let caleAbsFisMediu = path.join(__dirname, imag.fisier_mediu);
-//         sharp(path.join(caleAbs, imag.fisier)).resize(400).toFile(caleAbsFisMediu);
-
-//         imag.fisier = "/" + path.join(obGlobal.obImagini.cale_galerie, imag.fisier);
-//     }
-// }
 
 function initImagini() {
     var continut = fs.readFileSync(path.join(__dirname, "/resurse/json/galerie.json")).toString("utf-8");
@@ -195,12 +176,12 @@ function initImagini() {
         imag.fisier_mediu = "/" + path.join(obGlobal.obImagini.cale_galerie, "mediu", nume_fisier + "_mediu" + ".webp");
         let caleAbsFisMediu = path.join(__dirname, imag.fisier_mediu);
         sharp(path.join(caleAbs, imag.fisier)).resize(400).toFile(caleAbsFisMediu);
-
         imag.fisier = "/" + path.join(obGlobal.obImagini.cale_galerie, imag.fisier);
     }
 }
 
 initImagini();
+console.log(obGlobal.obImagini.imagini);
 //function afiseazaEroare(res, _identificator, _titlu =, _text, _imagine = {}) //trimitere ca obiect ( destructuring ) 
 //name parameters mai sus, si mai jos parametrii default 
 function afiseazaEroare(res, _identificator, _titlu = "titlu default", _text, _imagine) {

@@ -6,30 +6,88 @@
 #grid-galerie {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-row-gap: 0.5em;
-  grid-column-gap: 0.5em;
+  grid-template-areas:
+    ". . . "
+    ". z-gol ."
+    ". . ."
+    ". . ."
+    ". z-gol2 ."
+    ". . .";
+  grid-row-gap: 1em;
+  grid-column-gap: 1em;
   counter-reset: nrimag 0;
   /* de la cat incepe numaratoarea */
   /* nrimag=3 */
+}
+
+#grid-galerie figure {
+  padding: 1em;
 }
 
 #grid-galerie img {
   width: 100%;
 }
 
+#gol {
+  grid-area: z-gol;
+}
+
+#gol2 {
+  grid-area: z-gol2;
+}
+
 #grid-galerie figcaption {
   text-align: center;
+  margin-top: 0.3em;
   counter-increment: nrimag 1;
   /* nrimag+=2 , din cat in cat sa mearga numaratoarea*/
 }
 
 #grid-galerie figcaption::before {
-  content: counter(nrimag, upper-alpha) ")";
+  content: counter(nrimag, lower-roman) ")";
   /* upper alpha- numere cu majuscula/ lower-alpha: cu litera mica, fara nimic -> numar  */
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width:1000px) {
+  #grid-galerie {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      ". ."
+      ". ."
+      ". ."
+      ". ."
+      ". .";
+  }
+
+  #gol {
+    display: none;
+  }
+
+  #gol2 {
+    display: none;
+  }
+}
+
+@media screen and (max-width:600px) {
   #grid-galerie {
     display: block;
   }
+}
+
+#img-container {
+  overflow: hidden;
+  transition: all 0.13s;
+}
+
+#img-container:hover {
+  border-radius: 15px;
+  transition: all 0.13s;
+}
+
+#grid-galerie img:hover {
+  opacity: 0.5;
+  transform: scale(1.4);
+  transform-origin: top center;
+  transition: all 0.13s;
 }

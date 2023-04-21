@@ -4,52 +4,37 @@
 		{
 			"fisier": "briose-frisca.png",
 			"descriere": "Brioșe",
-			"luni": [
-				"martie",
-				"februarie",
-				"noiembrie",
-				"aprilie"
-			]
+			"anotimp": "primavara"
 		},
 		{
 			"fisier": "clatite.png",
 			"descriere": "Clătite cu dulceață",
-			"luni": [
-				"ianuarie",
-				"februarie",
-				"iunie",
-				"aprilie"
-			]
+			"anotimp": "primavara"
 		},
 		{
 			"fisier": "gogosi.png",
 			"descriere": "Gogoși glazurate",
-			"luni": [
-				"ianuarie",
-				"noiembrie",
-				"iunie",
-				"martie",
-				"aprilie"
-			]
+			"anotimp": "primavara"
 		},
 		{
 			"fisier": "tort-scortisoara.png",
 			"descriere": "Tort cu scorțisoară",
-			"luni": [
-				"noiembrie"
-			]
+			"anotimp": "primavara"
 		},
 		{
 			"fisier": "prajitura-ciocolata.png",
-			"descriere": "Prăjitură cu ciocolată"
+			"descriere": "Prăjitură cu ciocolată",
+			"anotimp": "primavara"
 		},
 		{
 			"fisier": "tarta-afine.png",
-			"descriere": "Tartă cu afine"
+			"descriere": "Tartă cu afine",
+			"anotimp": "primavara"
 		},
 		{
 			"fisier": "tort-trandafiri.png",
-			"descriere": "Tort special"
+			"descriere": "Tort special",
+			"anotimp": "primavara"
 		}
 	]
 }

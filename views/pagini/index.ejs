@@ -165,22 +165,7 @@
             </section>
             <section id="zona-6">
                 <h2>Zona 6</h2>
-                <div id="grid-galerie">
-                    <% for (let imag of locals.imagini) { d=new Date(); d.getMonth(); var
-                        v_luni=["ianuarie", "februarie" , "martie"
-                        ,"aprilie","mai","iunie","iulie","august", "septembrie" ,"octombrie","noiembrie","decembrie"];
-                        if(imag.luni && imag.luni.includes(v_luni[d.getMonth()])) { %>
 
-                        <figure>
-                            <picture>
-                                <source srcset="<%- imag.fisier_mediu %>" media="(max-width:1000px)" />
-                                <img src="<%- imag.fisier %>" alt="imagine">
-                            </picture>
-                            <figcaption><%- imag.descriere %></figcaption>
-                        </figure>
-                        <% } %>
-                            <% } %>
-                </div>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere cum eum libero distinctio mollitia
                     beatae hic, quae corrupti molestiae obcaecati amet voluptatum nisi neque necessitatibus, iure
                     repudiandae aliquid inventore culpa!</p>
@@ -204,77 +189,81 @@
                         <a href="https://www.youtube.com/embed/PAs9f8OHKZ8" target="ifr-video">Prezentare 2</a>
                     </div>
                 </div>
-                <div id="lista">
-                    <ul>
-                        <li>Instrumente cu clape
-                            <ul>
-                                <li>Orgă</li>
-                                <li>Acordeon</li>
-                                <li>Pianină</li>
-                                <li>Pian</li>
-                            </ul>
-                        </li>
-                        <li>Instrumente cu coarde
-                            <ul>
-                                <li>Instrumente cu coarde ciupite
-                                    <ul>
-                                        <li>Chitară</li>
-                                        <li>Mandolină</li>
-                                    </ul>
-                                </li>
-                                <li>Instrumente cu coarde frecate
-                                    <ul>
-                                        <li>Vioară</li>
-                                        <li>Violă</li>
-                                        <li>Contrabas</li>
-                                    </ul>
-                                <li>Instrumente de suflat
-                                    <ul>
-                                        <li>Fluier</li>
-                                        <li>Flaut</li>
-                                        <li>Trompetă</li>
-                                        <li>Trombon</li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
+                <br><br>
+                <%- include("../fragmente/galerie_statica.ejs") %>
+                    <br><br>
+                    <div id="lista">
+                        <ul>
+                            <li>Instrumente cu clape
+                                <ul>
+                                    <li>Orgă</li>
+                                    <li>Acordeon</li>
+                                    <li>Pianină</li>
+                                    <li>Pian</li>
+                                </ul>
+                            </li>
+                            <li>Instrumente cu coarde
+                                <ul>
+                                    <li>Instrumente cu coarde ciupite
+                                        <ul>
+                                            <li>Chitară</li>
+                                            <li>Mandolină</li>
+                                        </ul>
+                                    </li>
+                                    <li>Instrumente cu coarde frecate
+                                        <ul>
+                                            <li>Vioară</li>
+                                            <li>Violă</li>
+                                            <li>Contrabas</li>
+                                        </ul>
+                                    <li>Instrumente de suflat
+                                        <ul>
+                                            <li>Fluier</li>
+                                            <li>Flaut</li>
+                                            <li>Trompetă</li>
+                                            <li>Trombon</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
 
-                    </ul>
-                </div>
+                        </ul>
+                    </div>
 
 
-                <section id="Oferte">
-                    <h2>Oferte</h2>
-                    <p class="oferta">
-                        În perioada aceasta, <strong>(timp limitat)</strong> avem diferite seturi de oferte pentru
-                        instrumente
-                        de calitate la prețuri accesibile.
-                        <a class="link" href="https://souqeshop.ro/promotii/" target="blank">Direct promotii</a>
-                    </p> <!-- cerinta 10, atentionare folosind tagul strong-->
-                    <section id="Oferte_incepatori">
-                        <h3> Oferte pentru începători</h3>
+                    <section id="Oferte">
+                        <h2>Oferte</h2>
                         <p class="oferta">
-                            Dispunem de oferte atractive pentru produsele recomandate muzicanților de la început de
-                            drum.
-                        </p>
-                        <p class="oferta">
-                            Doar în această perioadă, avem oferte de : <s>15%</s> <ins
-                                style="text-decoration:none;">25%</ins> !
-                        </p> <!-- cerinta 10, folosirea tagurilor <s> si <ins> -->
-                    </section>
-                    <section id="Oferte_avansati">
-                        <h3> Oferte pentru avansați</h3>
-                        <p class="oferta">
-                            Dispunem de asemenea de oferte atractive pentru produsele recomandate muzicanților avansați
-                            pentru a
-                            le oferi un sunet de <b>calitate superioară</b>.
-                        </p>
-                        <p class="oferta">
-                            Doar în această perioadă, avem oferte de : <s>10%</s> <ins
-                                style="text-decoration:none;">20%</ins> !
-                        </p>
-                    </section>
-                </section><!-- cerinta 6, folosirea section imbricat, cu heading-urile corespunzătoare-->
+                            În perioada aceasta, <strong>(timp limitat)</strong> avem diferite seturi de oferte pentru
+                            instrumente
+                            de calitate la prețuri accesibile.
+                            <a class="link" href="https://souqeshop.ro/promotii/" target="blank">Direct promotii</a>
+                        </p> <!-- cerinta 10, atentionare folosind tagul strong-->
+                        <section id="Oferte_incepatori">
+                            <h3> Oferte pentru începători</h3>
+                            <p class="oferta">
+                                Dispunem de oferte atractive pentru produsele recomandate muzicanților de la început de
+                                drum.
+                            </p>
+                            <p class="oferta">
+                                Doar în această perioadă, avem oferte de : <s>15%</s> <ins
+                                    style="text-decoration:none;">25%</ins> !
+                            </p> <!-- cerinta 10, folosirea tagurilor <s> si <ins> -->
+                        </section>
+                        <section id="Oferte_avansati">
+                            <h3> Oferte pentru avansați</h3>
+                            <p class="oferta">
+                                Dispunem de asemenea de oferte atractive pentru produsele recomandate muzicanților
+                                avansați
+                                pentru a
+                                le oferi un sunet de <b>calitate superioară</b>.
+                            </p>
+                            <p class="oferta">
+                                Doar în această perioadă, avem oferte de : <s>10%</s> <ins
+                                    style="text-decoration:none;">20%</ins> !
+                            </p>
+                        </section>
+                    </section><!-- cerinta 6, folosirea section imbricat, cu heading-urile corespunzătoare-->
             </div>
             <div id="outer">
                 <a id="back-to-top" href="#">
