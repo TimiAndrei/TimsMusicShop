@@ -5,6 +5,7 @@ const path = require("path");
 const sharp = require("sharp");
 const sass = require("sass");
 const { Client } = require("pg"); //destructuring
+const { randomInt } = require("crypto");
 
 var client = new Client({
     database: "musicshopdb",
@@ -60,6 +61,24 @@ app.get(["/index", "/", "/home"], function (req, res) {
 // render stie ca e folosit pentru template, si se uita in views (folderul default)
 app.get("/despre", function (req, res) {
     res.render("pagini/despre");
+});
+
+app.get("/galerie_animata", function (req, res) {
+    let nrImagini = randomInt(6, 12);
+    if (nrImagini % 2 == 0)
+        nrImagini++;
+
+    let imgInv = [...obGlobal.obImagini.imagini].reverse();
+
+    let fisScss = path.join(__dirname, "Resurse/scss/galerie_animata.scss");
+    let liniiFisScss = fs.readFileSync(fisScss).toString().split('\n');
+
+    let stringImg = "$nrImg: " + nrImagini + ";";
+    liniiFisScss.shift();
+    liniiFisScss.unshift(stringImg);
+    fs.writeFileSync(fisScss, liniiFisScss.join('\n'))
+
+    res.render("pagini/galerie_animata", { imagini: obGlobal.obImagini.imagini, nrImagini: nrImagini, imgInv: imgInv });
 });
 // app.get("/despre", function (req, res) {
 //     res.render("pagini/despre");
@@ -181,7 +200,7 @@ function initImagini() {
 }
 
 initImagini();
-console.log(obGlobal.obImagini.imagini);
+
 //function afiseazaEroare(res, _identificator, _titlu =, _text, _imagine = {}) //trimitere ca obiect ( destructuring ) 
 //name parameters mai sus, si mai jos parametrii default 
 function afiseazaEroare(res, _identificator, _titlu = "titlu default", _text, _imagine) {
