@@ -404,65 +404,45 @@ a.link[href^="http"]:hover::before {
 }
 
 hr {
-    border: 15px solid var(--complement2);
+    height: 50px;
     border-radius: 5px;
+    background-image: radial-gradient(white 10%, var(--complement3) 35%, transparent 10%);
+    background-size: 16px 16px;
+    background-repeat: repeat-x;
+    position: relative;
+    border: 0;
+    filter: blur(0.4px);
+}
+
+hr::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
     width: 100%;
+    height: 16px;
+    /* Set the height of the pseudo-element */
+    background-image: radial-gradient(white 1%, var(--complement3) 55%, transparent 1%);
+    background-size: 16px 16px;
+    background-repeat: repeat-x;
+    background-position-x: 12px;
+    top: 8%;
+    filter: blur(0.6px);
 }
 
-.bubble1 {
-    width: 50px;
-    height: 50px;
-    /* border: 1px solid lightgrey; */
-    border-radius: 100%;
-    /* margin: 0 auto; */
-    background-image: radial-gradient(white 40%, var(--complement3) 60%);
-    position: relative;
-}
-
-.blur1 {
-    height: 50px;
-    width: 50px;
-    border-radius: 100%;
-    backdrop-filter: blur(5px);
-}
-
-.bubble2 {
-    width: 25px;
-    height: 25px;
-    /* border: 1px solid lightgrey; */
-    border-radius: 100%;
+hr::after {
+    content: "";
+    display: block;
     position: absolute;
-    /* margin: 0 auto; */
-    transform: translateY(-25px);
-    background-image: radial-gradient(white 10%, var(--complement1) 40%);
-}
+    left: 0;
+    width: 100%;
+    height: 16px;
+    /* Set the height of the pseudo-element */
+    background-image: radial-gradient(white 10%, var(--complement3) 35%, transparent 30%);
+    background-size: 16px 16px;
+    background-repeat: repeat-x;
+    top: 15%;
+    background-position-x: -10px;
+    filter: blur(0.4px);
 
-.blur2 {
-    position: relative;
-    z-index: 100;
-    height: 25px;
-    width: 25px;
-    border-radius: 100%;
-    backdrop-filter: blur(3px);
-}
-
-.bubble3 {
-    width: 40px;
-    height: 40px;
-    /* border: 1px solid lightgrey; */
-    border-radius: 100%;
-    position: absolute;
-    /* margin: 0 auto; */
-    z-index: -1;
-    transform: translate3d(25px, -60px, 0px);
-    background-image: radial-gradient(white 10%, var(--complement2) 40%);
-}
-
-.blur3 {
-    position: relative;
-    z-index: 100;
-    height: 40px;
-    width: 40px;
-    border-radius: 100%;
-    backdrop-filter: blur(5px);
 }
