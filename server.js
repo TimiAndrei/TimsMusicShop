@@ -14,13 +14,7 @@ var client = new Client({
     host: "localhost",
     port: 5432,
 });
-// client.connect();
-
-// client.query("select * from lab8_12", function (err, rez) {
-//     console.log("Eroare BD", err);
-
-//     console.log("Rezultat BD", rez.rows);
-// });
+client.connect();
 
 obGlobal = {
     obErori: null,
@@ -28,7 +22,15 @@ obGlobal = {
     folderScss: path.join(__dirname, "Resurse", "scss"),
     folderCss: path.join(__dirname, "Resurse", "css"),
     folderBackup: path.join(__dirname, "Resurse/backup"),
+    optiuniMeniu: []
 }; // obiect global
+
+client.query("select * from unnest(enum_range(null::tipuri_produse))", function (err, rezTip) {
+    if (err)
+        console.log(err);
+    else
+        obGlobal.optiuniMeniu = rezTip.rows;
+});
 
 
 app = express();
@@ -43,6 +45,11 @@ app.set("view engine", "ejs"); // motor de template
 app.use("/Resurse", express.static(__dirname + "/Resurse"));
 // express.static e o functie care returneaza un obiect
 // asa "livrez" resursele pentru site 
+app.use("/*", function (req, res, next) {
+    res.locals.optiuniMeniu = obGlobal.optiuniMeniu;
+    next();
+});
+
 app.use("/node_modules", express.static(__dirname + "/node_modules"));
 app.use(/^\/Resurse(\/[a-zA-Z0-9]*(?!\.)[a-zA-Z0-9]*)*$/, function (req, res) {
     afiseazaEroare(res, 403);
@@ -65,10 +72,8 @@ app.get("/despre", function (req, res) {
 
 app.get("/galerie_animata", function (req, res) {
     let nrImagini = randomInt(6, 12);
-    if (nrImagini % 2 == 0)
+    if (nrImagini % 2 != 0)
         nrImagini++;
-
-    let imgInv = [...obGlobal.obImagini.imagini].reverse();
 
     let fisScss = path.join(__dirname, "Resurse/scss/galerie_animata.scss");
     let liniiFisScss = fs.readFileSync(fisScss).toString().split('\n');
@@ -78,17 +83,74 @@ app.get("/galerie_animata", function (req, res) {
     liniiFisScss.unshift(stringImg);
     fs.writeFileSync(fisScss, liniiFisScss.join('\n'))
 
-    res.render("pagini/galerie_animata", { imagini: obGlobal.obImagini.imagini, nrImagini: nrImagini, imgInv: imgInv });
+    res.render("pagini/galerie_animata", { imagini: obGlobal.obImagini.imagini, nrImagini: nrImagini });
 });
-// app.get("/despre", function (req, res) {
-//     res.render("pagini/despre");
-// });
 
+app.get("/produse", function (req, res) {
+
+    client.query("select * from unnest(enum_range(null::categ_prajitura))", function (err, rezCategorie) {
+        if (err) {
+            console.log(err);
+            afiseazaEroare(res, 2);
+        }
+        else {
+            let conditieWhere = "";
+            if (req.query.tip)
+                conditieWhere = ` WHERE tip_produs='${req.query.tip}'`;
+            client.query("SELECT * from prajituri" + conditieWhere, function (err, rez) {
+
+                if (err) {
+                    console.log(err);
+                    afiseazaEroare(res, 2);
+                }
+                else
+                    res.render("pagini/produse", { produse: rez.rows, optiuni: rezCategorie.rows });
+            });
+        }
+    });
+
+
+});
+
+app.get("/produs/:id", function (req, res) {
+    console.log(req.params);
+
+    client.query(`SELECT * FROM prajituri WHERE id=${req.params.id}`, function (err, rezultat) {
+        if (err) {
+            console.log(err);
+            afiseazaEroare(res, 2);
+        }
+        else
+            res.render("pagini/produs", { prod: rezultat.rows[0] });
+    });
+});
 //app.get(/[a-zA-Z0-9]\.ejs$/) //regex pentru a verifica daca fisierele .ejs
 app.get("/*.ejs", function (req, res) {//wildcard pentru a verifica daca fisierele .ejs
 
     afiseazaEroare(res, 400);
 });
+
+app.get("/*", function (req, res) {
+    try {
+        // console.log(req.url);
+        res.render("pagini" + req.url, function (err, rezRandare) {
+            if (err) {
+                if (err.message.startsWith("Failed to lookup view"))
+                    // afiseazaEroare(res, { _identificator: 404, _titlu: "ceva" }); //trimit ca obiect
+                    afiseazaEroare(res, 404); // trimit ca parametrii
+                else
+                    afiseazaEroare(res);
+            }
+            else {
+                //console.log(rezRandare);
+                res.send(rezRandare);
+            }
+        });
+    } catch (err) {
+        if (err.message.startsWith("Cannot find module"))
+            afiseazaEroare(res, 404);
+    }
+}); // path general pentru fiecare pagina si in caz de not found, send error
 
 vectorFoldere = ["temp", "temp1", "backup"]
 
@@ -102,8 +164,9 @@ for (let folder of vectorFoldere) {
 
 function compileazaCss(caleScss, caleCss) {
     if (!caleCss) {
-        let vectorCale = caleScss.split("\\");
-        let numeFisierExtensie = vectorCale[vectorCale.length - 1];
+        // let vectorCale = caleScss.split("\\");
+        // let numeFisierExtensie = vectorCale[vectorCale.length - 1];
+        let numeFisierExtensie = path.basename(caleScss);
         let numeFisier = numeFisierExtensie.split(".")[0]; // a.scss->[("a"), ("scss")]
         caleCss = numeFisier + ".css";
     }
@@ -112,9 +175,12 @@ function compileazaCss(caleScss, caleCss) {
     if (!path.isAbsolute(caleCss))
         caleCss = path.join(obGlobal.folderCss, caleCss);
 
-    //LA ACEST PUNCT AVEM CAI ABSOLUTE IN CALESCSS SI FOLDER
-    let vectorCale = caleScss.split("\\");
-    let numeFisCss = vectorCale[vectorCale.length - 1];
+    let caleBackup = path.join(obGlobal.folderBackup, "/Resurse/css");
+    if (!fs.existsSync(caleBackup)) {
+        fs.mkdirSync(caleBackup, { recursive: true });//pentru ca nu e creat la prima rulare css, deci mai ruleaza o data
+    }
+
+    let numeFisCss = path.basename(caleScss);
     if (fs.existsSync(caleCss)) {
         fs.copyFileSync(caleCss, path.join(obGlobal.folderBackup, numeFisCss));
     }
@@ -139,27 +205,6 @@ fs.watch(obGlobal.folderScss, function (eveniment, numeFis) {
             compileazaCss(caleCompleta);
     }
 })
-app.get("/*", function (req, res) {
-    try {
-        // console.log(req.url);
-        res.render("pagini" + req.url, function (err, rezRandare) {
-            if (err) {
-                if (err.message.startsWith("Failed to lookup view"))
-                    // afiseazaEroare(res, { _identificator: 404, _titlu: "ceva" }); //trimit ca obiect
-                    afiseazaEroare(res, 404); // trimit ca parametrii
-                else
-                    afiseazaEroare(res);
-            }
-            else {
-                //console.log(rezRandare);
-                res.send(rezRandare);
-            }
-        });
-    } catch (err) {
-        if (err.message.startsWith("Cannot find module"))
-            afiseazaEroare(res, 404);
-    }
-}); // path general pentru fiecare pagina si in caz de not found, send error
 
 
 function initErori() {
@@ -218,6 +263,7 @@ function afiseazaEroare(res, _identificator, _titlu = "titlu default", _text, _i
         if (eroare.status) {
             res.status(eroare.identificator).render("pagini/eroare", { titlu: titlu, text: text, imagine: imagine });
         } else {
+            let errDef = obGlobal.obErori.eroare_default;
             res.render("pagini/eroare", { titlu: titlu, text: text, imagine: obGlobal.obErori.cale_baza = "/" + errDef.imagine });
 
         }
