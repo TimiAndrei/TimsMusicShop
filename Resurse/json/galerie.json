@@ -2,9 +2,46 @@
 	"cale_galerie": "Resurse/imagini/galerie",
 	"imagini": [
 		{
-			"fisier": "briose-frisca.png",
-			"descriere": "Brioșe",
-			"anotimp": "primavara"
+			"fisier": "pian.jpg",
+			"descriere": "Pian",
+			"anotimp": "primavara",
+			"autor": "drpainmm"
+		},
+		{
+			"fisier": "cajon.png",
+			"descriere": "Cajon",
+			"anotimp": "primavara",
+			"autor": "obBilder"
+		},
+		{
+			"fisier": "saxofon.png",
+			"descriere": "Saxofon",
+			"anotimp": "primavara",
+			"autor": "obBilder"
+		},
+		{
+			"fisier": "vioara-clasica.png",
+			"descriere": "Vioara clasica",
+			"anotimp": "primavara",
+			"autor": "obBilder"
+		},
+		{
+			"fisier": "vioara-electrica.png",
+			"descriere": "Vioara electrica",
+			"anotimp": "primavara",
+			"autor": "obBilder"
+		},
+		{
+			"fisier": "chitara-clasica.png",
+			"descriere": "Chitară clasică",
+			"anotimp": "primavara",
+			"autor": "obBilder"
+		},
+		{
+			"fisier": "chitara-electrica.png",
+			"descriere": "Chitară electrica",
+			"anotimp": "primavara",
+			"autor": "obBilder"
 		},
 		{
 			"fisier": "clatite.png",

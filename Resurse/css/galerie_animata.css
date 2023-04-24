@@ -33,7 +33,7 @@
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-fill-mode: forwards;
-  animation-duration: 18s;
+  animation-duration: 16s;
   transform-origin: center;
 }
 #galanim:hover figure {
@@ -80,10 +80,6 @@
   animation-delay: 16s;
 }
 
-#galanim figure:nth-child(9) {
-  animation-delay: 18s;
-}
-
 #container-galerie-animata {
   border: 3px solid #000;
   width: 400px;
@@ -96,27 +92,26 @@
 @keyframes gal_exemplu {
   0% {
     opacity: 1;
-    z-index: 100;
   }
-  5.5555555556% {
+  6.25% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+  7.5% {
     opacity: 1;
     transform: translateX(30%);
-    z-index: 100;
   }
-  8.1111111111% {
-    transform: translateX(-40%);
-    opacity: 0.6;
-    z-index: 100;
+  9.5% {
+    transform: translateX(-70%);
+    opacity: 1;
   }
-  11.1111111111% {
+  12.5% {
     opacity: 0;
-    transform: translateX(100%);
-    z-index: 100;
+    transform: translateX(140%);
   }
-  94.4444444444% {
+  93.75% {
     opacity: 0;
-    transform: translateX(100%);
-    z-index: -100;
+    transform: translateX(0%);
   }
   100% {
     opacity: 1;

@@ -1,4 +1,4 @@
-$nrImg: 9;
+$nrImg: 8;
 
 .galerie_animata {
     margin-left: auto;
@@ -83,44 +83,42 @@ $nrImg: 9;
 $start: calc(1.5 / ($nrImg * 3) * 100%);
 $mid: calc(3 / ($nrImg * 3) * 100%);
 $midm1: calc(3 / ($nrImg * 3) * 100% - 3%);
+$midm2: calc(3 / ($nrImg * 3) * 100% - 5%);
 $end: calc(100% - (1.5 / ($nrImg * 3) * 100%));
 
 @keyframes gal_exemplu {
     0% {
         opacity: 1;
-        z-index: 100;
     }
 
     #{$start} {
         opacity: 1;
-        // transform: rotate(0deg);
-        // clip-path: circle(75%);
+        transform: translateX(0%);
+
+    }
+
+    #{$midm2} {
+        opacity: 1;
         transform: translateX(30%);
-        z-index: 100;
+
     }
 
     #{$midm1} {
-        // clip-path: circle(25%);
-        // transform: rotate(0deg);
-        transform: translateX(-40%);
-        opacity: 0.6;
-        z-index: 100;
+        transform: translateX(-70%);
+        opacity: 1;
+
     }
 
     #{$mid} {
         opacity: 0;
-        // transform: rotate(360deg);
-        // clip-path: circle(0%);
-        transform: translateX(100%);
-        z-index: 100;
+        transform: translateX(140%);
+
     }
 
     #{$end} {
         opacity: 0;
-        // transform: rotate(0deg);
-        // clip-path: circle(75%);
-        transform: translateX(100%);
-        z-index: -100;
+        transform: translateX(0%);
+
     }
 
     100% {
