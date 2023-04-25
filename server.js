@@ -230,11 +230,8 @@ function initImagini() {
     obGlobal.obImagini = JSON.parse(continut);
     let vImagini = obGlobal.obImagini.imagini;
     let caleAbs = path.join(__dirname, obGlobal.obImagini.cale_galerie);
-    // console.log("cale absoluta:  " + caleAbs);
     let caleAbsMediu = path.join(caleAbs, "mediu");
-    // console.log("cale absoluta mediu:  " + caleAbsMediu)
     let caleAbsMare = path.join(caleAbs, "mare");
-    // console.log("cale absoluta mare:  " + caleAbsMare)
     let caleAbsMic = path.join(caleAbs, "mic");
 
     if (!fs.existsSync(caleAbsMediu))

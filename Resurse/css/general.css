@@ -456,3 +456,24 @@ p::selection {
     color: var(--background-white);
     background-color: var(--background-color);
 }
+
+#container-moving-text {
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--background-color);
+    color: var(--text-white);
+}
+
+#moving-text {
+    animation: scroll-animation 10s linear infinite;
+}
+
+@keyframes scroll-animation {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
