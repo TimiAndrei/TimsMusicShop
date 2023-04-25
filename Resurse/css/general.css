@@ -445,3 +445,9 @@ hr::after {
     background-position-x: -10px;
     filter: blur(0.4px);
 }
+
+#columnc {
+    column-count: 2;
+    padding: var(--padding);
+    column-rule-style: dotted;
+}

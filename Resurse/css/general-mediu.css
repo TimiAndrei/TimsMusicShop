@@ -22,3 +22,7 @@ html {
     /* column-gap: 50px;
     row-gap: 50px; */
 }
+
+#columnc {
+    column-count: 1;
+}

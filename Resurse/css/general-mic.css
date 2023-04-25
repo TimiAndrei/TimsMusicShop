@@ -23,3 +23,7 @@ html {
     width: 300px;
     text-align: center;
 }
+
+#columnc {
+    column-count: 1;
+}
