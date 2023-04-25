@@ -15,8 +15,14 @@
                                                             <% if(i>= 10) { break; }%>
                                                                 <figure>
                                                                     <picture>
-                                                                        <source srcset="<%- imag.fisier_mediu %>"
-                                                                            media="(max-width:1000px)" />
+                                                                        <source media="(max-width:600px)"
+                                                                            srcset="<%- imag.fisier_mic %>" />
+
+                                                                        <source media="(max-width:1000px)"
+                                                                            srcset="<%- imag.fisier_mediu %>" />
+
+                                                                        <source media="(max-width:2400px)"
+                                                                            srcset="<%- imag.fisier_mare %>" />
                                                                         <div id="img-container"><img
                                                                                 src="<%- imag.fisier %>"></div>
                                                                     </picture>
