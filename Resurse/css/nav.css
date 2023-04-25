@@ -68,6 +68,20 @@ ul.menu li div {
 
 }
 
+ul.menu li ul li a::before {
+    content: "→";
+    opacity: 0;
+    position: absolute;
+    left: 10px;
+}
+
+ul.menu li ul li a:hover::before {
+    opacity: 1;
+    transform: translateX(100%);
+    transition: all 0.3s linear;
+
+}
+
 ul.menu ul {
     padding: 0;
     margin: 0;

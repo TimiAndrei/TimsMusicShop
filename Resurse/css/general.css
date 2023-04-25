@@ -233,8 +233,8 @@ footer {
     color: var(--text-white);
     background-color: var(--background-color);
     padding: 10px;
-    width: 100px;
-    height: 25px;
+    width: 120px;
+    height: 35px;
     margin-bottom: 3px;
     margin-top: 2.5px;
     margin-left: 0;
@@ -249,7 +249,7 @@ footer {
 
 .taburi-iframe a:hover {
     background-color: var(--complement3);
-    width: 115px;
+    width: 125px;
 }
 
 #ifr-video {
@@ -444,5 +444,4 @@ hr::after {
     top: 15%;
     background-position-x: -10px;
     filter: blur(0.4px);
-
 }
