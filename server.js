@@ -63,7 +63,6 @@ app.get("/favicon.ico", function (req, res) {
 // ejs e pentru a include cod html in alte fisiere html
 
 app.get(["/index", "/", "/home", "/acasa"], function (req, res) {
-    console.log(obGlobal.obImagini);
     res.render("pagini/index", { ip: req.ip, a: 10, b: 20, imagini: obGlobal.obImagini.imagini });
 }); //render - compileaza ejs-ul si il trimite catre client
 // render stie ca e folosit pentru template, si se uita in views (folderul default)
