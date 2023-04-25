@@ -451,3 +451,8 @@ hr::after {
     padding: var(--padding);
     column-rule-style: dotted;
 }
+
+p::selection {
+    color: var(--background-white);
+    background-color: var(--background-color);
+}
