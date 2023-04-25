@@ -406,7 +406,9 @@ a.link[href^="http"]:hover::before {
 hr {
     height: 50px;
     border-radius: 5px;
-    background-image: radial-gradient(white 10%, var(--complement3) 35%, transparent 10%);
+    background-image: radial-gradient(white 10%, var(--complement3) 35%, transparent 10%),
+        radial-gradient(white 10%, var(--complement3) 35%, transparent 10%),
+        radial-gradient(white 10%, var(--complement3) 35%, transparent 10%);
     background-size: 16px 16px;
     background-repeat: repeat-x;
     position: relative;
@@ -421,7 +423,6 @@ hr::before {
     left: 0;
     width: 100%;
     height: 16px;
-    /* Set the height of the pseudo-element */
     background-image: radial-gradient(white 1%, var(--complement3) 55%, transparent 1%);
     background-size: 16px 16px;
     background-repeat: repeat-x;
@@ -437,7 +438,6 @@ hr::after {
     left: 0;
     width: 100%;
     height: 16px;
-    /* Set the height of the pseudo-element */
     background-image: radial-gradient(white 10%, var(--complement3) 35%, transparent 30%);
     background-size: 16px 16px;
     background-repeat: repeat-x;
