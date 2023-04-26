@@ -88,7 +88,7 @@ app.get("/galerie_animata", function (req, res) {
 
 app.get("/produse", function (req, res) {
 
-    client.query("select * from unnest(enum_range(null::categ_prajitura))", function (err, rezCategorie) {
+    client.query("select * from unnest(enum_range(null::categ_instrument))", function (err, rezCategorie) {
         if (err) {
             console.log(err);
             afiseazaEroare(res, 2);
@@ -96,8 +96,8 @@ app.get("/produse", function (req, res) {
         else {
             let conditieWhere = "";
             if (req.query.tip)
-                conditieWhere = ` WHERE tip_produs='${req.query.tip}'`;
-            client.query("SELECT * from prajituri" + conditieWhere, function (err, rez) {
+                conditieWhere = ` WHERE tip_instrument='${req.query.tip}'`;
+            client.query("SELECT * from instrumente" + conditieWhere, function (err, rez) {
 
                 if (err) {
                     console.log(err);
@@ -115,7 +115,7 @@ app.get("/produse", function (req, res) {
 app.get("/produs/:id", function (req, res) {
     console.log(req.params);
 
-    client.query(`SELECT * FROM prajituri WHERE id=${req.params.id}`, function (err, rezultat) {
+    client.query(`SELECT * FROM instrumente WHERE id=${req.params.id}`, function (err, rezultat) {
         if (err) {
             console.log(err);
             afiseazaEroare(res, 2);
