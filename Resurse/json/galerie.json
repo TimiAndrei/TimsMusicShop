@@ -2,10 +2,50 @@
 	"cale_galerie": "Resurse/imagini/galerie",
 	"imagini": [
 		{
-			"fisier": "pian.jpg",
+			"fisier": "pianina.jpg",
 			"descriere": "Pian",
 			"anotimp": "primavara",
 			"autor": "drpainmm"
+		},
+		{
+			"fisier": "acordeon.jpg",
+			"descriere": "Acordeon",
+			"anotimp": "primavara"
+		},
+		{
+			"fisier": "chitara-bas.jpg",
+			"descriere": "Chitara Bas",
+			"anotimp": "primavara"
+		},
+		{
+			"fisier": "contrabas.jpg",
+			"descriere": "Contrabas",
+			"anotimp": "primavara"
+		},
+		{
+			"fisier": "flaut.jpg",
+			"descriere": "Flaut",
+			"anotimp": "primavara"
+		},
+		{
+			"fisier": "fluier.jpg",
+			"descriere": "Fluier",
+			"anotimp": "primavara"
+		},
+		{
+			"fisier": "mandolina.jpg",
+			"descriere": "Mandolina",
+			"anotimp": "primavara"
+		},
+		{
+			"fisier": "orga.jpg",
+			"descriere": "Orga",
+			"anotimp": "primavara"
+		},
+		{
+			"fisier": "pian.jpg",
+			"descriere": "Pian",
+			"anotimp": "primavara"
 		},
 		{
 			"fisier": "cajon.png",
