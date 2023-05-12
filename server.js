@@ -251,9 +251,11 @@ function initImagini() {
         let caleAbsFisMediu = path.join(__dirname, imag.fisier_mediu);
         let caleAbsFisMare = path.join(__dirname, imag.fisier_mare);
         let caleAbsFisMic = path.join(__dirname, imag.fisier_mic);
-        sharp(path.join(caleAbs, imag.fisier)).resize(600, 500, { fit: 'inside' }).toFile(caleAbsFisMare);
-        sharp(path.join(caleAbs, imag.fisier)).resize(400, 300, { fit: 'inside' }).toFile(caleAbsFisMediu);
-        sharp(path.join(caleAbs, imag.fisier)).resize(200, 200, { fit: 'inside' }).toFile(caleAbsFisMic);
+        let caleProduse = path.join(__dirname, "Resurse", "Imagini", "produse", "processed", nume_fisier + ".jpg")
+        sharp(path.join(caleAbs, imag.fisier)).resize(600, 500, { fit: 'contain' }).toFile(caleAbsFisMare);
+        sharp(path.join(caleAbs, imag.fisier)).resize(400, 300, { fit: 'contain' }).toFile(caleAbsFisMediu);
+        sharp(path.join(caleAbs, imag.fisier)).resize(300, 300, { fit: 'contain' }).toFile(caleAbsFisMic);
+        sharp(path.join(caleAbs, imag.fisier)).resize(600, 500, { fit: 'contain' }).toFile(caleProduse);
         imag.fisier = path.join(obGlobal.obImagini.cale_galerie, imag.fisier);
     }
 }

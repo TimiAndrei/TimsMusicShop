@@ -12,20 +12,21 @@
                                                 <% for (let imag of locals.imagini) { %>
                                                     <% if(imag.anotimp && imag.anotimp==anotimp) { %>
                                                         <% i=i + 1; %>
-                                                            <% if(i>= 10) { break; }%>
+                                                            <% if(i>= 9) { break; }%>
                                                                 <figure>
-                                                                    <picture>
-                                                                        <source media="(max-width:600px)"
-                                                                            srcset="<%- imag.fisier_mic %>" />
+                                                                    <div id="img-container">
+                                                                        <picture>
+                                                                            <source media="(max-width:600px)"
+                                                                                srcset="<%- imag.fisier_mic %>" />
 
-                                                                        <source media="(max-width:1000px)"
-                                                                            srcset="<%- imag.fisier_mediu %>" />
+                                                                            <source media="(max-width:1000px)"
+                                                                                srcset="<%- imag.fisier_mediu %>" />
 
-                                                                        <source media="(max-width:2400px)"
-                                                                            srcset="<%- imag.fisier_mare %>" />
-                                                                        <div id="img-container"><img
-                                                                                src="<%- imag.fisier %>"></div>
-                                                                    </picture>
+                                                                            <source media="(max-width:2400px)"
+                                                                                srcset="<%- imag.fisier_mare %>" />
+                                                                            <img src="<%- imag.fisier %>">
+                                                                        </picture>
+                                                                    </div>
                                                                     <% if(imag.autor) { %>
                                                                         <figcaption><%- imag.descriere %> by
                                                                                 <%- imag.autor %></figcaption>
