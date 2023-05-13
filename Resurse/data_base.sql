@@ -10,54 +10,60 @@ CREATE TABLE IF NOT EXISTS instrumente (
    id serial PRIMARY KEY,
    nume VARCHAR(50) UNIQUE NOT NULL,
    descriere TEXT,
-   pret NUMERIC(8,2) NOT NULL,
+   imagine VARCHAR(300),
    tip_instrument tipuri_instrument,
    categorie categ_instrument,
-   pentru categ_muzician,
-   imagine VARCHAR(300),
-   data_adaugare TIMESTAMP DEFAULT current_timestamp
+   pret NUMERIC(8,2) NOT NULL,
+   greutate NUMERIC(5,2) CHECK (greutate>0),
+   data_adaugare TIMESTAMP DEFAULT current_timestamp,
+   pentru categ_muzician, 
+   material VARCHAR[],
+   are_cutie_transport BOOLEAN
 );
 
-INSERT into instrumente (nume,descriere,pret, tip_instrument,categorie, pentru, imagine) VALUES 
-('Acordeon Hohner Bravo III 96', 'Acordeon cu 96 de basuri, sunet puternic și design ergonomic.', 1599.00, 'acordeon', 'instrument cu clape', 'avansat', 'acordeon.jpg'),
+INSERT into instrumente (nume, descriere, imagine, tip_instrument, categorie, pret, greutate, pentru, material, are_cutie_transport) VALUES 
 
-('Vioara Yamaha V3SKA', 'Vioara cu sunet cald și proiectare de înaltă calitate, ideală pentru studenți.', 399.00, 'vioara', 'instrument cu coarde', 'incepator', 'vioara.jpg'),
+('Acordeon Hohner Bravo III 96', 'Acordeon cu 96 de basuri, sunet puternic și design ergonomic.','acordeon.jpg', 'acordeon','instrument cu clape', 1599.00, 10, 'avansat', '{"carbon", "metal", "plastic"}', true),
 
-('Orga Roland C-380', 'Orga digitală cu 61 de clape, sunet autentic de orgă de biserică și funcții avansate.', 3999.00, 'orga', 'instrument cu clape', 'avansat', 'orga.jpg'),
+('Acordeon Hohner Bravo III 72', 'Acordeon cu 72 de basuri, sunet puternic și design ergonomic.','acordeon.jpg', 'acordeon','instrument cu clape', 1299.00, 9.5, 'mediu', '{"lemn", "metal", "plastic"}', true),
 
-('Flaut Yamaha YFL-212', 'Flaut de studiu cu mecanism precis și sunet expresiv.', 599.00, 'flaut', 'instrument de suflat', 'incepator', 'flaut.jpg'),
+('Vioara 4/4 Stentor Student', 'Vioara cu sunet clar și calitate, perfectă pentru studenți.','vioara.jpg', 'vioara','instrument cu coarde', 599.00, 2.3, 'incepator', '{"lemn", "carbon", "fildeș"}', true),
 
-('Chitară electrică Fender Stratocaster', 'Chitară electrică legendară cu sunet versatil și design iconic.', 999.00, 'chitara', 'instrument cu coarde', 'mediu', 'chitara-electrica.jpg'),
+('Orga Roland C-330', 'Orga cu 36 de clape, sunete și funcții avansate.','orga.jpg', 'orga','instrument cu clape', 4599.00, 66, 'avansat', '{"lemn", "metal", "plastic"}', true),
 
-('Pianina Yamaha U1', 'Pianina verticală cu sunet puternic și clape de calitate superioară.', 4999.00, 'pianina', 'instrument cu clape', 'avansat', 'pianina.jpg'),
+('Flaut Yamaha YFL-212', 'Flaut pentru începători, cu sunet clar și intonație precisă.','flaut.jpg', 'flaut','instrument de suflat', 499.00, 0.4, 'incepator', '{"lemn", "metal"}', false),
 
-('Contrabas Stentor Graduate', 'Contrabas acustic de studiu cu sunet profund și făcut din lemn de artar.', 1999.00, 'contrabas', 'instrument cu coarde', 'mediu', 'contrabas.jpg'),
+('Chitară electrică Fender Stratocaster', 'Chitară electrică iconică, cu sunet puternic și ușor de cântat.','chitara.jpg', 'chitara','instrument cu coarde', 1999.00, 4.5, 'mediu', '{"lemn", "metal"}', true),
 
-('Trompetă Jupiter JTR700', 'Trompetă de studiu cu sunet clar și valori precise, potrivită pentru începători.', 699.00, 'trompeta', 'instrument de suflat', 'incepator', 'trompeta.jpg'),
+('Pianină Yamaha P-45', 'Pianină compactă, cu sunet de înaltă calitate și tastatură cu sensibilitate la atingere.','pianina.jpg', 'pianina','instrument cu clape', 749.00, 11.5, 'incepator', '{"lemn", "metal", "plastic"}', false),
 
-('Mandolină Epiphone MM-30S', 'Mandolină acustică cu sunet strălucitor și finisaj clasic.', 299.00, 'mandolina', 'instrument cu coarde', 'incepator', 'mandolina.jpg'),
+('Contrabas Stagg EDB-3/4', 'Contrabas electric cu sunet profund și potențiometru de volum.','contrabas.jpg', 'contrabas','instrument cu coarde', 999.00, 4.8, 'avansat', '{"lemn", "metal", "carbon"}', false),
 
-('Trombon King 2B', 'Trombon profesionist cu sunet bogat și construcție durabilă.', 1699.00, 'trombon', 'instrument de suflat', 'mediu', 'trombon.jpg'),
+('Trompetă Yamaha YTR-2330', 'Trompetă pentru începători, cu sunet cald și intonație precisă.','trompeta.jpg', 'trompeta','instrument de suflat', 899.00, 1.1, 'incepator', '{"metal"}', true),
 
-('Pian Yamaha C3X', 'Pian cu coadă de concert cu sunet puternic și finisaj de lux.', 24999.00, 'pian', 'instrument cu clape', 'avansat', 'pian.jpg'),
+('Mandolină Stagg M20', 'Mandolină cu sunet puternic și calitate, potrivită pentru diverse genuri muzicale.','mandolina.jpg', 'mandolina','instrument cu coarde', 199.00, 1.4, 'mediu', '{"lemn"}', true),
 
-('Chitară clasică Ramirez R1', 'Chitară clasică de înaltă calitate cu sunet bogat și construcție tradițională.', 1499.00, 'chitara', 'instrument cu coarde', 'mediu', 'chitara-clasica.jpg'),
+('Trombon Jupiter JTB700', 'Trombon de calitate, cu sunet puternic și intonație precisă.','trombon.jpg', 'trombon','instrument de suflat', 999.00, 2.7, 'avansat', '{"metal"}', false),
 
-('Flaut piccolo Gemeinhardt 4P', 'Flaut piccolo profesionist cu sunet strălucitor și mecanism precis.', 899.00, 'flaut', 'instrument de suflat', 'avansat', 'flaut.jpg'),
+('Pian Yamaha YDP-144', 'Pian digital cu 88 de clape și 10 sunete de pian, inclusiv Yamaha CFX Grand și Bösendorfer Imperial. Are funcții de înregistrare, playback și conectivitate Bluetooth.', 'pian.jpg', 'pian', 'instrument cu clape', 1250.00, 38.0, 'mediu', '{"lemn", "metal"}', true),
 
-('Vioara Cremona SV-800', 'Vioara profesională cu sunet expresiv și lemn de calitate superioară.', 2999.00, 'vioara', 'instrument cu coarde', 'avansat', 'vioara.jpg'),
+('Chitara clasica Valencia CG160', 'Chitara clasica cu corp din lemn de artar, finisaj lucios, tastiera din lemn de trandafir și corzi de nylon. Are sunet cald și clar.', 'chitara_clasica.jpg', 'chitara', 'instrument cu coarde', 250.00, 2.1, 'incepator', '{"lemn"}', false),
 
-('Acordeon Pigini P30/3', 'Acordeon de înaltă calitate cu sunet puternic și design elegant.', 5499.00, 'acordeon', 'instrument cu clape', 'avansat', 'acordeon.jpg'),
+('Flaut Yamaha YFL-222', 'Flaut de nivel începător cu picior deschis și mecanisme plate pentru un răspuns precis și ușor de jucat. Are corp din alamă și cap argintat pentru un sunet cald și clar.', 'flaut.jpg', 'flaut', 'instrument de suflat', 500.00, 0.4, 'incepator', '{"alama", "argint"}', true),
 
-('Trompetă Bach Stradivarius 180S37', 'Trompetă profesională cu sunet cald și răspuns excelent.', 2199.00, 'trompeta', 'instrument de suflat', 'avansat', 'trompeta.jpg'),
+('Vioara Stentor Student II', 'Vioară pentru studenți, cu corp din lemn de artar, finisaj lucios, tastieră din lemn de ebonită și corzi Pirastro. Vine cu husă și arc.', 'vioara.jpg', 'vioara', 'instrument cu coarde', 300.00, 0.5, 'incepator', '{"lemn"}', true),
 
-('Pian digital Casio Privia PX-S3000', 'Pian digital compact cu sunet autentic de pian și funcții avansate.', 999.00, 'pian', 'instrument cu clape', 'mediu', 'pian.jpg'),
+('Acordeon Weltmeister Rubin', 'Acordeon cu sunet puternic, corp din lemn de fag și clapete din aluminiu. Are 34 de clape și 72 de basuri. Vine cu curea și husă.', 'acordeon.jpg', 'acordeon', 'instrument cu clape', 2100.00, 8.5, 'avansat', '{"lemn", "metal"}', true),
 
-('Chitară bas Ibanez SR500E', 'Chitară bas electrică cu sunet puternic și finisaj modern.', 899.00, 'chitara', 'instrument cu coarde', 'mediu', 'chitara-bas.jpg'),
+('Trompeta Yamaha YTR-2330', 'Trompetă de nivel începător cu campană din alamă și pistonii din alamă nichelată. Are un sunet clar și puternic și vine cu un rucsac pentru transport.', 'trompeta.jpg', 'trompeta', 'instrument de suflat', 750.00, 1.0, 'incepator', '{"alama", "nickel"}', true),
 
-('Flaut traversier Pearl Quantz PF-665', 'Flaut profesionist cu sunet expresiv și mecanism precis.', 1899.00, 'flaut', 'instrument de suflat', 'avansat', 'flaut.jpg'),
+('Pian digital Roland FP-30X', 'Pian digital portabil cu 88 de clape și tehnologie SuperNATURAL de generare a sunetului. Are funcții de conectivitate Bluetooth, înregistrare și playback. Vine cu o pedală și un suport opțional.', 'pian.jpg', 'pian', 'instrument cu clape', 999.00, 14.1, 'mediu', '{"lemn", "metal"}', false),
 
-('Contrabas electric NS Design WAV4', 'Contrabas electric cu sunet versatil și design modern.', 1499.00, 'contrabas', 'instrument cu coarde', 'mediu', 'contrabas.jpg');
+('Chitară bas Fender Player Series Precision Bass', 'Bas electric cu 4 corzi, două split single coil pickups, buton de ton și două de volum.','chitara_bas.jpg', 'chitara','instrument cu coarde', 999.00, 4.50, 'mediu', '{"lemn", "metal"}', true),
+
+('Flaut Roland GCC-400', 'Flaut din alamă cu 16 găuri închise, mecanism de mișcare offset G și teava dreaptă.','flaut.jpg', 'flaut','instrument de suflat', 699.00, 0.65, 'incepator', '{"metal"}', true),
+
+('Contrabas Yamaha SVC-210', 'Contrabas electric portabil, cu corzi din nailon și efecte digitale integrate.','contrabas.jpg', 'contrabas','instrument cu coarde', 2799.00, 8.50, 'avansat', '{"lemn", "metal", "plastic"}', false);
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO timi;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO timi;
