@@ -6,7 +6,7 @@
         content="Cofetaria Dulcelind ofera prajituri, torturi, produse de patiserie cu optiunea de achizitie online si livrare prin curier.">
     <meta name="keywords" content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse">
     <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
-    <title>Cofetăria Dulcelind - home</title>
+    <title>Tim's Music Shop</title>
     <%- include("../fragmente/head") %>
         <script type="text/javascript" src=/Resurse/js/produse.js></script>
 
@@ -17,16 +17,15 @@
 
         <main>
             <label> Nume: <input type="text" id="inp-nume"></label>
-            <!--<label> Maxim calorii: <input type="number" id="inp-calorii" value="10000"></label>-->
-            <div> Calorii:<!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
-                <p><label>Dietetic (calorii &lt; 350)
-                        <input id="i_rad1" name="gr_rad" value="0:350" type="radio" />
+            <div> Greutate:<!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
+                <p><label>Ușor (kg &lt; 2)
+                        <input id="i_rad1" name="gr_rad" value="0:2" type="radio" />
                     </label></p>
-                <p><label>Mediu (350 &le; calorii &lt; 700)
-                        <input id="i_rad2" name="gr_rad" value="350:750" type="radio" />
+                <p><label>Mediu (2 &le; kg &lt; 20)
+                        <input id="i_rad2" name="gr_rad" value="2:20" type="radio" />
                     </label>
-                <p><label>Ridicat caloric (700 &le; calorii)
-                        <input id="i_rad3" name="gr_rad" value="700:1000000000" type="radio" />
+                <p><label>Greu (20 &le; kg)
+                        <input id="i_rad3" name="gr_rad" value="20:1000000000" type="radio" />
                     </label>
                 <p><label>Toate
                         <input id="i_rad4" checked name="gr_rad" value="toate" type="radio" />
@@ -34,7 +33,7 @@
             </div>
 
 
-            <label> Pret minim: <input type="range" id="inp-pret" value="0" min="0" max="70"> <span
+            <label> Pret minim: <input type="range" id="inp-pret" value="0" min="0" max="5000"> <span
                     id="infoRange">(0)</span></label>
             <label>Select simplu:
                 <select id="inp-categorie">
@@ -67,6 +66,8 @@
                                             prod.tip_instrument%></span></p>
                             </div>
                             <p class="categorie">Categorie:<span class="val-categorie"><%- prod.categorie%></span></p>
+                            <p class="categorie">Greutate:<span class="val-greutate"><%- prod.greutate%></span>
+                            </p>
                             <figure>
                                 <a href="/produs/<%-prod.id %>"><img
                                         src="/Resurse/Imagini/produse/processed/<%- prod.imagine %>"

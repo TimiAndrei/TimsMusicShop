@@ -6,6 +6,9 @@ const sharp = require("sharp");
 const sass = require("sass");
 const { Client } = require("pg"); //destructuring
 const { randomInt } = require("crypto");
+// const AccesBD = require("./module_proprii/accesbd.js");
+
+// AccesBD.getInstanta()
 
 var client = new Client({
     database: "musicshopdb",

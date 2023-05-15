@@ -74,9 +74,19 @@ body {
     --margin: 10px;
 }
 
+
 body.dark {
-    --background-negru: #000000;
-    --text-white: white;
+    /* --background-negru: #000000;
+    --text-white: white; */
+    --background-white: #938d8d;
+    --text-black: rgb(255, 255, 255);
+    --text-white: rgb(0, 0, 0);
+    --text-red: red;
+    --background-color: #101936;
+    --complement1: #321a6a;
+    --complement2: #070743;
+    --complement3: #305f8b;
+    --complement4: #29454e;
 }
 
 /*variabile vizibile la nivel de arbore body */
