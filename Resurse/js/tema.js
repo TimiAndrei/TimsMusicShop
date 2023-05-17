@@ -10,6 +10,7 @@ window.addEventListener("DOMContentLoaded", function () {
             localStorage.removeItem("tema");
         }
         else {
+            document.getElementById("tema").checked = "true"; // nu merge 
             document.body.classList.add("dark");
             localStorage.setItem("tema", "dark");
         }

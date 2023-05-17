@@ -497,3 +497,25 @@ p::selection {
     /* left: 0; */
     z-index: -100;
 }
+
+.theme-wrapper {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    top: 2rem;
+}
+
+.theme-wrapper .custom-switch {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    /* Adjust this value to create spacing between the switch and the icons */
+}
+
+.theme-pic {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    /* Adjust this value to create spacing between the icons */
+}

@@ -92,10 +92,10 @@ window.addEventListener("DOMContentLoaded", function () {
 
             let prod_descriere = prod.getElementsByClassName("val-descriere")[0].innerHTML.toLowerCase();
             let cond7 = (val_descriere === "" || prod_descriere.includes(val_descriere));
-            // let cond8 = selectedMaterials.length === 0 || !selectedMaterials.some(material => prod_material.indexOf(material) !== -1);
 
-            // let cond8 = selectedMaterials.length === 0 || !selectedMaterials.some(material => prod_material.includes(material));
-            let cond8 = (val_material === "" || !prod_material.includes(selectedMaterials));
+            // let cond8 = selectedMaterials.length === 0 || !selectedMaterials.some(material => prod_material.indexOf(material) !== -1);
+            let cond8 = selectedMaterials.length === 0 || !selectedMaterials.some(material => prod_material.includes(material));
+            // let cond8 = (val_material === "" || !selectedMaterials.includes(prod_material));
 
             if (cond1 && cond2 && cond3 && cond4 && cond5 && cond6 && cond7 && cond8)
                 prod.style.display = "block";
@@ -220,7 +220,33 @@ window.addEventListener("DOMContentLoaded", function () {
     }
 
     // Add event listener to the filter button
-    document.getElementById("filter-button").addEventListener("click", filterProducts);
+    // document.getElementById("filter-button").addEventListener("click", filterProducts);
+    const textarea = document.getElementById("i_textarea");
+
+    function validare(textarea) {
+        let val_descriere = textarea.value.toLowerCase();
+        var produse = document.getElementsByClassName("produs");
+        let isInvalid = true; // Flag to track validation result
+
+        for (let prod of produse) {
+            let prod_descriere = prod.getElementsByClassName("val-descriere")[0].innerHTML.toLowerCase();
+            if (prod_descriere.includes(val_descriere)) {
+                isInvalid = false;
+                break; // Exit the loop if a match is found
+            }
+        }
+
+        if (isInvalid) {
+            textarea.classList.add("is-invalid"); // Add the is-invalid class
+        } else {
+            textarea.classList.remove("is-invalid"); // Remove the is-invalid class
+        }
+    }
+
+    // Event listener to trigger validation on textarea input
+    textarea.addEventListener("input", function () {
+        validare(textarea);
+    });
 
 
 });

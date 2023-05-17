@@ -17,103 +17,139 @@
   <main>
     <div class="div-filtre">
       <h3>Filtrare Produse</h3>
-      <br>
-      <label> Nume: <input type="text" id="inp-nume"></label>
-      <div>
-        <p>Greutate:</p>
-        <!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
-        <p><label>Ușor (kg &lt; 2)
-            <input id="i_rad1" name="gr_rad" value="0:2" type="radio" />
-          </label></p>
-        <p><label>Mediu (2 &le; kg &lt; 20)
-            <input id="i_rad2" name="gr_rad" value="2:20" type="radio" />
-          </label></p>
-        <p><label>Greu (20 &le; kg)
-            <input id="i_rad3" name="gr_rad" value="20:1000000000" type="radio" />
-          </label></p>
-        <p><label>Toate
-            <input id="i_rad4" checked name="gr_rad" value="toate" type="radio" />
-          </label></p>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-floating">
+            <input type="text" id="inp-nume" class="form-control" placeholder=" ">
+            <label for="inp-nume">Nume</label>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label>Greutate:</label> <br> <label class="radio-label">
+            Toate
+            <input id="i_rad4" checked name="gr_rad" value="toate" type="radio">
+          </label> &nbsp;
+          <div class="col-md-5">
+            <label class="radio-label">
+              Ușor (kg &lt; 2)
+              <input id="i_rad1" name="gr_rad" value="0:2" type="radio">
+            </label>
+            <label class="radio-label">
+              Mediu (2 &le; kg &lt; 20)
+              <input id="i_rad2" name="gr_rad" value="2:20" type="radio">
+            </label>&nbsp;&nbsp;
+            <label class="radio-label">
+              Greu (20 &le; kg)
+              <input id="i_rad3" name="gr_rad" value="20:1000000000" type="radio">
+            </label>&nbsp;&nbsp;
+          </div>
+        </div>
       </div>
+      <br>
       <div id="checkbox-group">
-        <p>Tipuri de instrumente: </p>
-        <% for (let tip of locals.tipuri) { %>
-        <div class="div-tip">
-          <p><label><%- tip.unnest %>
-              <input id="i_check<%- tip.unnest %>" checked name="gr_chck" value="<%- tip.unnest %>" type="checkbox" />
-            </label></p>
+        <label>Tipuri de instrumente:</label> &nbsp;
+        <% for (let tip of locals.tipuri) { %> <div class="div-tip">
+          <label class="checkbox-label">
+            <%- tip.unnest %>
+            <input id="i_check<%- tip.unnest %>" checked name="gr_chck" value="<%- tip.unnest %>" type="checkbox">&nbsp;&nbsp;
+          </label>
         </div>
         <% } %>
       </div>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <label>Pret:</label>
+          <span><%-locals.minPrice%></span>
+          <input class="form-range" type="range" id="inp-pret" value="<%-minPrice%>" min="<%-minPrice%>" max="<%-maxPrice%>">
+          <span><%-locals.maxPrice%></span>
+          <span id="infoRange">(0)</span>
+        </div>
+        <div class="col-md-6">
+          <label>Categorie:</label>
+          <select id="inp-categorie" class="form-select">
+            <option id="sel-toate" selected value="toate">toate</option>
+            <% for (let opt of locals.optiuni) { %>
+            <option value="<%- opt.unnest %>"><%- opt.unnest %></option>
+            <% } %>
+          </select>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <label>Material:</label>
+          <input list="id_lista" id="i_datalist" class="form-control">
+          <datalist id="id_lista">
+            <%for(let material of locals.material) {%>
+            <option value="<%-material%>"><%-material%></option>
+            <%}%>
+          </datalist>
+        </div>
+        <div class="col-md-6">
+          <label value="Selectați categoriile pe care NU vi le doriți">Materiale pe care NU le doriți:</label>
+          <select id="i_sel_multiplu" multiple size="4" class="form-select">
+            <%for(let material of locals.material) {%>
+            <option value="<%-material%>"><%-material%></option>
+            <%}%>
+          </select>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-floating">
+            <textarea class="form-control" id="i_textarea" placeholder=" " required></textarea>
+            <label for="i_textarea">Description</label>
+            <div class="invalid-feedback">We don't have products matching this description. Please enter a valid description.</div>
+          </div>
+        </div>
+      </div>
 
-
-      <label> Pret minim: <span><%-locals.minPrice%></span> <input type="range" id="inp-pret" value="<%-minPrice%>" min="<%-minPrice%>" max="<%-maxPrice%>"><span><%-locals.maxPrice%></span> <span id="infoRange">(0)</span></label>
-      <br><br>
-      <label>Categorie:
-        <select id="inp-categorie">
-          <option id="sel-toate" selected value="toate">toate</option>
-          <% for (let opt of locals.optiuni) { %>
-          <option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
-          <% } %>
-        </select>
-      </label>
-      <br><br>
-      <label>Material:
-        <input list="id_lista" id="i_datalist">
-        <datalist id="id_lista">
-          <%for(let material of locals.material) {%>
-          <option value="<%-material%>"><%-material%></option>
-          <%}%>
-        </datalist>
-      </label>
-      <br><br>
-      <label>Căutare după descriere:
-        <textarea id="i_textarea" placeholder="Sunet clar"></textarea>
-      </label>
-      <br><br>
-      <label value="Selectați categoriile pe care NU vi le doriți"> Materiale pe care NU le doriți: 
-        <select id="i_sel_multiplu" multiple size="4">
-          <%for(let material of locals.material) {%>
-          <option value="<%-material%>"><%-material%></option>
-          <%}%>
-        </select>
-      </label>
-      <p>
-        <button id="filtrare">Filtreaza</button>
-
-        <button id="resetare">Reseteaza</button><br />
-        <button id="sortCrescNume">Sorteaza crescator dupa pret si nume</button>
-        <button id="sortDescrescNume">Sorteaza descrescator dupa pret si nume</button>
-
-      </p>
-
+    
+      <br>
+      <br>
+        <button id="filtrare" class="btn btn-primary btn-lg" ><span class="d-inline d-sm-none"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel-fill" viewBox="0 0 16 16">
+          <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2z"/>
+        </svg> </span><span class="d-none d-sm-inline"> Filter</span></button> &nbsp;
+        
+        <button id="resetare" class="btn btn-primary btn-lg" ><span class="d-inline d-sm-none"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+          <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+        </svg> </span><span class="d-none d-sm-inline"> Reseteaza</span></button>
+        <br>
+        <br>
+        <button id="sortCrescNume" class="btn btn-primary btn-lg" >Sorteaza crescator dupa pret si nume</button>
+        <br>
+        <br>
+        <button id="sortDescrescNume" class="btn btn-primary btn-lg">Sorteaza descrescator dupa pret si nume</button>
       <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
     </div>
     <section id="produse">
       <div class="grid-produse">
         <% for( let prod of locals.produse) { %>
-          <article class="produs <%-prod.categorie%>" id="ar_ent_<%-prod.id%>">
-            <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>"><span class="val-nume"><%-
+            <article class="produs <%-prod.categorie%>" id="ar_ent_<%-prod.id%>">
+              <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>"><span class="val-nume"><%-
                                             prod.nume%></span></a></h3>
-            <div class="info-prod">
-              <p class="categorie">Categorie: <span class="val-categorie"><%- prod.categorie%></span>
-              </p>
-            </div>
-            <div class="column-wrapper">
-              <div class="column">
-
-                <figure>
-                  <a href="/produs/<%-prod.id %>"><img src="/Resurse/Imagini/produse/processed/<%- prod.imagine %>" style="width:100%;height:auto; border-bottom-left-radius:30px;" alt="[imagine <%- prod.nume %>]" /></a>
-                </figure>
-              </div>
-              <div class="column">
-                <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
-                <p class="tip_instrument">Tip: <span class="val-tip"><%-prod.tip_instrument%></span>
+              <div class="info-prod">
+                <p class="categorie">Categorie: <span class="val-categorie"><%- prod.categorie%></span>
                 </p>
-                <p class="material">Materiale: <span class="val-material"><%-prod.material%></span>
-                <p class="pentru disnone">Pentru: <span class="val-pentru"><%- prod.pentru%></span>
-                <p class="descriere disnone">Descriere: <span class="val-descriere"><%- prod.descriere%></span></p>
-                <% function formatDate(date) { const options={ day: '2-digit' , month: 'long' ,year: 'numeric' , weekday: 'long' }; 
+              </div>
+              <div class="column-wrapper">
+                <div class="column">
+
+                  <figure>
+                    <a href="/produs/<%-prod.id %>"><img src="/Resurse/Imagini/produse/processed/<%- prod.imagine %>" style="width:100%;height:auto; border-bottom-left-radius:30px;" alt="[imagine <%- prod.nume %>]" /></a>
+                  </figure>
+                </div>
+                <div class="column">
+                  <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
+                  <p class="tip_instrument">Tip: <span class="val-tip"><%-prod.tip_instrument%></span>
+                  </p>
+                  <p class="material">Materiale: <span class="val-material"><%-prod.material%></span>
+                  <p class="pentru disnone">Pentru: <span class="val-pentru"><%- prod.pentru%></span>
+                  <p class="descriere disnone">Descriere: <span class="val-descriere"><%- prod.descriere%></span></p>
+                  <% function formatDate(date) { const options={ day: '2-digit' , month: 'long' ,year: 'numeric' , weekday: 'long' }; 
                 const formattedDate=new Date(date).toLocaleDateString('ro-RO', options);
                 const parts=formattedDate.split(' ');
                 const day = parts[1];
@@ -122,31 +158,31 @@
                 const weekday=parts[0].split(',')[0].charAt(0).toUpperCase() + parts[0].split(',')[0].slice(1);
                 return `${day}-${month}-${year} [${weekday}]`; } %>
 
-                <p class=" data">Data: <time datetime="<%- prod.data_adaugare %>">
-                    <span class="val-data"><%- formatDate(prod.data_adaugare) %></span></time>
-                </p>
+                  <p class=" data">Data: <time datetime="<%- prod.data_adaugare %>">
+                      <span class="val-data"><%- formatDate(prod.data_adaugare) %></span></time>
+                  </p>
 
 
-                <p class="categorie disnone">Greutate:<span class="val-greutate"><%-
+                  <p class="categorie disnone">Greutate:<span class="val-greutate"><%-
                                                 prod.greutate%></span>
-                </p>
+                  </p>
 
-                <p class="tip disnone">Tip:<span class="val-tip"><%-
+                  <p class="tip disnone">Tip:<span class="val-tip"><%-
                 prod.tip_instrument%></span>
-                </p>
-                <p class="are_cutie_transport">Cutie Transport:
-                  <span class="val-cutie_transport"><%- prod.are_cutie_transport%></span>
+                  </p>
+                  <p class="are_cutie_transport">Cutie Transport:
+                    <span class="val-cutie_transport"><%- prod.are_cutie_transport%></span>
 
-                  <label class="selecteaza-cos">
-                    Adaugă în coș<br />
-                    <input type="checkbox" class="select-cos disnone" value="<%-prod.id %>" autocomplete="off">
-                  </label>
+                    <label class="selecteaza-cos">
+                      Adaugă în coș<br />
+                      <input type="checkbox" class="select-cos disnone" value="<%-prod.id %>" autocomplete="off">
+                    </label>
+                </div>
               </div>
-            </div>
-          </article>
-          <% }%>
-    </div>
-    </section>
+            </article>
+            <% }%>
+        </div>
+        </section>
   </main>
 
   <%- include("../fragmente/footer") %>

@@ -5,8 +5,8 @@
     $body-color: #141313,
 
     $grid-breakpoints: (xs: 0,
-        sm: 500px,
-        md: 700px,
+        sm: 600px,
+        md: 800px,
         lg: 1000px,
         xl: 1200px,
         xxl: 1400px,
@@ -33,4 +33,15 @@
         5: 1rem,
         6: 0.5rem,
     ),
-    $font-family-base: "Fira Sans");
+    $font-family-base: "Fira Sans",
+
+    // Increase the size of the range slider thumb
+    $form-range-thumb-width: 1.5rem,
+    $form-range-thumb-height: 1.5rem,
+
+    // Customize the color of the range slider thumb
+    $form-range-thumb-bg: #151559,
+
+    // Customize the color of the range slider track
+    $form-range-track-bg: #24124f,
+)
