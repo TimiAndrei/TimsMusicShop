@@ -5,7 +5,7 @@
 
 body {
     --menu-height: 50px;
-    --button-width: 200px;
+    --button-width: 300px;
     --menu-background: var(--complement4);
     --button-border: black;
     --menu-text-color: white;

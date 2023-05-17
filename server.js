@@ -28,7 +28,7 @@ obGlobal = {
     optiuniMeniu: []
 }; // obiect global
 
-client.query("select * from unnest(enum_range(null::tipuri_produse))", function (err, rezTip) {
+client.query("select * from unnest(enum_range(null::categ_instrument))", function (err, rezTip) {
     if (err)
         console.log(err);
     else
@@ -90,30 +90,72 @@ app.get("/galerie_animata", function (req, res) {
 });
 
 app.get("/produse", function (req, res) {
-
-    client.query("select * from unnest(enum_range(null::categ_instrument))", function (err, rezCategorie) {
-        if (err) {
-            console.log(err);
-            afiseazaEroare(res, 2);
-        }
-        else {
-            let conditieWhere = "";
-            if (req.query.tip)
-                conditieWhere = ` WHERE tip_instrument='${req.query.tip}'`;
-            client.query("SELECT * from instrumente" + conditieWhere, function (err, rez) {
-
-                if (err) {
-                    console.log(err);
-                    afiseazaEroare(res, 2);
+    client.query(
+        "SELECT * FROM unnest(enum_range(null::categ_instrument))",
+        function (err, rezCategorie) {
+            if (err) {
+                console.log(err);
+                afiseazaEroare(res, 2);
+            } else {
+                let conditieWhere = "";
+                if (req.query.categorie) {
+                    conditieWhere = ` WHERE categorie='${req.query.categorie}'`;
                 }
-                else
-                    res.render("pagini/produse", { produse: rez.rows, optiuni: rezCategorie.rows });
-            });
+                client.query(
+                    "SELECT * FROM instrumente" + conditieWhere,
+                    function (err, rez) {
+                        if (err) {
+                            console.log(err);
+                            afiseazaEroare(res, 2);
+                        } else {
+                            client.query(
+                                "SELECT MIN(pret) AS min_price, MAX(pret) AS max_price FROM instrumente",
+                                function (err, rezPret) {
+                                    if (err) {
+                                        console.log(err);
+                                        afiseazaEroare(res, 2);
+                                    } else {
+                                        client.query(
+                                            "SELECT distinct(unnest(material)) FROM instrumente",
+                                            function (err, rezMaterial) {
+                                                if (err) {
+                                                    console.log(err);
+                                                    afiseazaEroare(res, 2);
+                                                } else {
+                                                    client.query(
+                                                        "SELECT * FROM unnest(enum_range(null::tipuri_instrument))",
+                                                        function (err, rezTip) {
+                                                            if (err) {
+                                                                console.log(err);
+                                                                afiseazaEroare(res, 2);
+                                                            } else {
+                                                                res.render("pagini/produse", {
+                                                                    produse: rez.rows,
+                                                                    optiuni: rezCategorie.rows,
+                                                                    minPrice: rezPret.rows[0].min_price,
+                                                                    maxPrice: rezPret.rows[0].max_price,
+                                                                    material: rezMaterial.rows.map((row) => row.unnest),
+                                                                    tipuri: rezTip.rows,
+                                                                });
+                                                            }
+                                                        }
+                                                    );
+                                                }
+                                            }
+                                        );
+                                    }
+                                }
+                            );
+                        }
+                    }
+                );
+            }
         }
-    });
-
-
+    );
 });
+
+
+
 
 app.get("/produs/:id", function (req, res) {
     console.log(req.params);

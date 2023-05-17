@@ -2,88 +2,154 @@
 <html lang="ro">
 
 <head>
-    <meta name="description"
-        content="Cofetaria Dulcelind ofera prajituri, torturi, produse de patiserie cu optiunea de achizitie online si livrare prin curier.">
-    <meta name="keywords" content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse">
-    <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
-    <title>Tim's Music Shop</title>
-    <%- include("../fragmente/head") %>
-        <script type="text/javascript" src=/Resurse/js/produse.js></script>
+  <meta name="description" content="Cofetaria Dulcelind ofera prajituri, torturi, produse de patiserie cu optiunea de achizitie online si livrare prin curier.">
+  <meta name="keywords" content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse">
+  <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
+  <title>Tim's Music Shop</title>
+  <%- include("../fragmente/head") %>
+  <script type="text/javascript" src=/Resurse/js/produse.js></script>
 
 </head>
 
 <body>
-    <%- include("../fragmente/header") %>
+  <%- include("../fragmente/header") %>
 
-        <main>
-            <label> Nume: <input type="text" id="inp-nume"></label>
-            <div> Greutate:<!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
-                <p><label>Ușor (kg &lt; 2)
-                        <input id="i_rad1" name="gr_rad" value="0:2" type="radio" />
-                    </label></p>
-                <p><label>Mediu (2 &le; kg &lt; 20)
-                        <input id="i_rad2" name="gr_rad" value="2:20" type="radio" />
-                    </label>
-                <p><label>Greu (20 &le; kg)
-                        <input id="i_rad3" name="gr_rad" value="20:1000000000" type="radio" />
-                    </label>
-                <p><label>Toate
-                        <input id="i_rad4" checked name="gr_rad" value="toate" type="radio" />
-                    </label>
-            </div>
+  <main>
+    <div class="div-filtre">
+      <h3>Filtrare Produse</h3>
+      <br>
+      <label> Nume: <input type="text" id="inp-nume"></label>
+      <div>
+        <p>Greutate:</p>
+        <!-- trebuie sa aiba acelasi name ca sa formeze un grup -->
+        <p><label>Ușor (kg &lt; 2)
+            <input id="i_rad1" name="gr_rad" value="0:2" type="radio" />
+          </label></p>
+        <p><label>Mediu (2 &le; kg &lt; 20)
+            <input id="i_rad2" name="gr_rad" value="2:20" type="radio" />
+          </label></p>
+        <p><label>Greu (20 &le; kg)
+            <input id="i_rad3" name="gr_rad" value="20:1000000000" type="radio" />
+          </label></p>
+        <p><label>Toate
+            <input id="i_rad4" checked name="gr_rad" value="toate" type="radio" />
+          </label></p>
+      </div>
+      <div id="checkbox-group">
+        <p>Tipuri de instrumente: </p>
+        <% for (let tip of locals.tipuri) { %>
+        <div class="div-tip">
+          <p><label><%- tip.unnest %>
+              <input id="i_check<%- tip.unnest %>" checked name="gr_chck" value="<%- tip.unnest %>" type="checkbox" />
+            </label></p>
+        </div>
+        <% } %>
+      </div>
 
 
-            <label> Pret minim: <input type="range" id="inp-pret" value="0" min="0" max="5000"> <span
-                    id="infoRange">(0)</span></label>
-            <label>Select simplu:
-                <select id="inp-categorie">
-                    <option id="sel-toate" selected value="toate">toate</option>
-                    <% for (let opt of locals.optiuni) { %>
-                        <option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
-                        <% } %>
-                </select>
-            </label>
-            <p>
-                <button id="filtrare">Filtreaza</button>
+      <label> Pret minim: <span><%-locals.minPrice%></span> <input type="range" id="inp-pret" value="<%-minPrice%>" min="<%-minPrice%>" max="<%-maxPrice%>"><span><%-locals.maxPrice%></span> <span id="infoRange">(0)</span></label>
+      <br><br>
+      <label>Categorie:
+        <select id="inp-categorie">
+          <option id="sel-toate" selected value="toate">toate</option>
+          <% for (let opt of locals.optiuni) { %>
+          <option value="<%- opt.unnest %>"><%- opt.unnest %> </option>
+          <% } %>
+        </select>
+      </label>
+      <br><br>
+      <label>Material:
+        <input list="id_lista" id="i_datalist">
+        <datalist id="id_lista">
+          <%for(let material of locals.material) {%>
+          <option value="<%-material%>"><%-material%></option>
+          <%}%>
+        </datalist>
+      </label>
+      <br><br>
+      <label>Căutare după descriere:
+        <textarea id="i_textarea" placeholder="Sunet clar"></textarea>
+      </label>
+      <br><br>
+      <label value="Selectați categoriile pe care NU vi le doriți"> Materiale pe care NU le doriți: 
+        <select id="i_sel_multiplu" multiple size="4">
+          <%for(let material of locals.material) {%>
+          <option value="<%-material%>"><%-material%></option>
+          <%}%>
+        </select>
+      </label>
+      <p>
+        <button id="filtrare">Filtreaza</button>
 
-                <button id="resetare">Reseteaza</button><br />
-                <button id="sortCrescNume">Sorteaza crescator dupa pret si nume</button>
-                <button id="sortDescrescNume">Sorteaza descrescator dupa pret si nume</button>
+        <button id="resetare">Reseteaza</button><br />
+        <button id="sortCrescNume">Sorteaza crescator dupa pret si nume</button>
+        <button id="sortDescrescNume">Sorteaza descrescator dupa pret si nume</button>
 
-            </p>
+      </p>
 
-            <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
-            <section id="produse">
-                <h2>Produse</h2>
-                <div class="grid-produse">
-                    <% for( let prod of locals.produse) { %>
-                        <article class="produs">
-                            <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>"><span class="val-nume"><%-
+      <p id="p-suma">Apăsați Alt+"c" pentru suma preturilor produselor afișate. </p>
+    </div>
+    <section id="produse">
+      <div class="grid-produse">
+        <% for( let prod of locals.produse) { %>
+          <article class="produs <%-prod.categorie%>" id="ar_ent_<%-prod.id%>">
+            <h3 class="nume">Nume: <a href="/produs/<%-prod.id %>"><span class="val-nume"><%-
                                             prod.nume%></span></a></h3>
-                            <div class="info-prod">
-                                <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
-                                <p class="tip_instrument">Tip Instrument: <span class="val-tip"><%-
-                                            prod.tip_instrument%></span></p>
-                            </div>
-                            <p class="categorie">Categorie:<span class="val-categorie"><%- prod.categorie%></span></p>
-                            <p class="categorie">Greutate:<span class="val-greutate"><%- prod.greutate%></span>
-                            </p>
-                            <figure>
-                                <a href="/produs/<%-prod.id %>"><img
-                                        src="/Resurse/Imagini/produse/processed/<%- prod.imagine %>"
-                                        style="width:50%;height:auto;" alt="[imagine <%- prod.nume %>]" /></a>
-                            </figure>
-                            <label class="selecteaza-cos">
-                                Selectează:<br />
-                                <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
-                            </label>
-                        </article>
-                        <% }%>
-                </div>
-            </section>
-        </main>
+            <div class="info-prod">
+              <p class="categorie">Categorie: <span class="val-categorie"><%- prod.categorie%></span>
+              </p>
+            </div>
+            <div class="column-wrapper">
+              <div class="column">
 
-        <%- include("../fragmente/footer") %>
+                <figure>
+                  <a href="/produs/<%-prod.id %>"><img src="/Resurse/Imagini/produse/processed/<%- prod.imagine %>" style="width:100%;height:auto; border-bottom-left-radius:30px;" alt="[imagine <%- prod.nume %>]" /></a>
+                </figure>
+              </div>
+              <div class="column">
+                <p class="pret">Pret: <span class="val-pret"><%- prod.pret%></span></p>
+                <p class="tip_instrument">Tip: <span class="val-tip"><%-prod.tip_instrument%></span>
+                </p>
+                <p class="material">Materiale: <span class="val-material"><%-prod.material%></span>
+                <p class="pentru disnone">Pentru: <span class="val-pentru"><%- prod.pentru%></span>
+                <p class="descriere disnone">Descriere: <span class="val-descriere"><%- prod.descriere%></span></p>
+                <% function formatDate(date) { const options={ day: '2-digit' , month: 'long' ,year: 'numeric' , weekday: 'long' }; 
+                const formattedDate=new Date(date).toLocaleDateString('ro-RO', options);
+                const parts=formattedDate.split(' ');
+                const day = parts[1];
+                const month=parts[2].charAt(0).toUpperCase() + parts[2].slice(1);
+                const year=parts[3];
+                const weekday=parts[0].split(',')[0].charAt(0).toUpperCase() + parts[0].split(',')[0].slice(1);
+                return `${day}-${month}-${year} [${weekday}]`; } %>
+
+                <p class=" data">Data: <time datetime="<%- prod.data_adaugare %>">
+                    <span class="val-data"><%- formatDate(prod.data_adaugare) %></span></time>
+                </p>
+
+
+                <p class="categorie disnone">Greutate:<span class="val-greutate"><%-
+                                                prod.greutate%></span>
+                </p>
+
+                <p class="tip disnone">Tip:<span class="val-tip"><%-
+                prod.tip_instrument%></span>
+                </p>
+                <p class="are_cutie_transport">Cutie Transport:
+                  <span class="val-cutie_transport"><%- prod.are_cutie_transport%></span>
+
+                  <label class="selecteaza-cos">
+                    Adaugă în coș<br />
+                    <input type="checkbox" class="select-cos disnone" value="<%-prod.id %>" autocomplete="off">
+                  </label>
+              </div>
+            </div>
+          </article>
+          <% }%>
+    </div>
+    </section>
+  </main>
+
+  <%- include("../fragmente/footer") %>
 </body>
 
 </html>

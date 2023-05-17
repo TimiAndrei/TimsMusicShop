@@ -1,0 +1,126 @@
+main {
+    --padd-main: 1rem;
+    padding-left: var(--padding);
+    padding-right: var(--padding);
+}
+
+.grid-produse {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 3rem;
+}
+
+.grid-produse .produs {
+    border-radius: 2rem;
+    box-shadow: 0px 0px 0.8rem 0.3rem grey;
+    overflow: hidden;
+}
+
+.grid-produse .produs h3 {
+    background-color: var(--complement2);
+    text-align: center;
+    margin-top: 0;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    margin-left: -10px;
+    margin-right: -10px;
+    padding-left: 12px;
+    padding-right: 12px;
+    color: var(--background-white);
+}
+
+.grid-produse .produs h3 a {
+    color: var(--background-white);
+    text-decoration: none;
+}
+
+.grid-produse .produs h3 a:hover {
+    color: var(--complement3);
+}
+
+.grid-produse .produs figure {
+    text-align: center;
+}
+
+.grid-produse .produs figure img {
+    border: 3px solid var(--complement2);
+}
+
+.grid-produse .produs .info-prod {
+    display: flex;
+    background-color: var(--complement3);
+    color: var(--background-white);
+}
+
+.grid-produse .produs .info-prod p {
+    text-align: center;
+    font-weight: bold;
+}
+
+.info-produse {
+    background-color: var(--complement1);
+    padding: 0.2rem;
+    box-shadow: 0px 0px 0.5rem 0.15rem grey;
+}
+
+.produs {
+    position: relative;
+}
+
+.div-filtre {
+    padding: 2rem;
+    border-radius: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    box-shadow: 0px 0px 0.5rem 0.15rem grey;
+}
+
+.selecteaza-cos {
+    display: inline-block;
+    background-color: var(--complement2);
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    border-radius: 10px;
+    border-bottom-right-radius: 30px;
+    text-align: center;
+    padding: 0.6rem;
+    padding-right: 1.5rem;
+    border: 1px solid transparent;
+    color: var(--text-white);
+}
+
+.selecteaza-cos:hover {
+    background-color: var(--complement1);
+    border: 3px solid var(--text-black);
+}
+
+.column-wrapper {
+    display: flex;
+}
+
+.column-wrapper .column {
+    flex: 1;
+    padding: 0.5rem;
+}
+
+.column-wrapper .column p {
+    margin-bottom: -15px;
+    margin-left: -30px;
+    font-weight: bolder;
+    color: var(--complement2);
+}
+
+.column-wrapper .column p span {
+    font-weight: lighter;
+    color: var(--text-black);
+}
+
+#checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.div-tip {
+    width: auto;
+}
