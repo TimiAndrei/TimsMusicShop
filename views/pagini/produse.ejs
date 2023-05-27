@@ -8,6 +8,7 @@
   <title>Tim's Music Shop</title>
   <%- include("../fragmente/head") %>
   <script type="text/javascript" src=/Resurse/js/produse.js></script>
+  <script type="text/javascript" src=/Resurse/js/bootstrap.js></script>
 
 </head>
 
@@ -182,20 +183,6 @@
             </article>
             <% }%>
         </div>
-        <script>
-          const cards = document.querySelectorAll('.produs'); // Select all the card elements
-          const animationDelay = 100; // Animation delay in milliseconds
-
-          function displayCardsWithDelay(cards, delay) {
-            cards.forEach((card, index) => {
-              setTimeout(() => {
-                card.style.display = 'block'; // Show the card
-              }, delay * (index + 1));
-            });
-          }
-
-          displayCardsWithDelay(cards, animationDelay); // Start the animation
-        </script>
         </section>
   </main>
 
