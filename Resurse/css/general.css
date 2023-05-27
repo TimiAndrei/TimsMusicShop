@@ -123,11 +123,6 @@ figure {
     margin: 0;
 }
 
-#banner {
-    width: 100%;
-    height: 100%;
-}
-
 iframe {
     height: 315px;
     width: 100%;
@@ -518,4 +513,51 @@ p::selection {
     height: 16px;
     margin-right: 5px;
     /* Adjust this value to create spacing between the icons */
+}
+
+.disclaimer-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: var(--complement3);
+    transition: opacity 5s, background-color 5s;
+    padding: var(--padding);
+    height: 25vh;
+    width: 25vw;
+    opacity: 0;
+}
+
+.banner-content p:first-of-type {
+    margin-left: -8px;
+}
+
+.banner-content p {
+    font-size: 1.5vw;
+    margin-bottom: 10px;
+    color: var(--text-white);
+}
+
+.banner-content button {
+    background-color: var(--complement1);
+    color: var(--text-white);
+    border: black solid 1px;
+    cursor: pointer;
+    position: relative;
+    left: 40%;
+}
+
+@keyframes bannerAnimation {
+    0% {
+        opacity: 0;
+        background-color: var(--complement3);
+    }
+
+    100% {
+        opacity: 0.75;
+        background-color: var(--complement2);
+    }
+}
+
+.disclaimer-banner.animation {
+    animation: bannerAnimation 5s forwards;
 }

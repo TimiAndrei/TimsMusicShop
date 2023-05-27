@@ -1,7 +1,73 @@
 window.addEventListener("DOMContentLoaded", function () {
+    const savedFilters = getCookie("last_filters");
+
+    let defaultFilters = {};
+
+    if (savedFilters) {
+        defaultFilters = JSON.parse(savedFilters);
+        let nume = document.getElementById("inp-nume");
+
+        if (defaultFilters.val_nume) {
+            nume.value = defaultFilters.val_nume;
+        }
+
+        let greutate = document.getElementsByName("gr_rad");
+        if (defaultFilters.greutate) {
+            for (let r of greutate) {
+                if (r.value == defaultFilters.greutate) {
+                    r.checked = true;
+                    break;
+                }
+            }
+        }
+
+        let inpPret = document.getElementById("inp-pret");
+        if (defaultFilters.val_pret) {
+            inpPret.value = defaultFilters.val_pret;
+        }
+
+        // Set the default value for 'inp-categorie'
+        let inpCategorie = document.getElementById("inp-categorie");
+        if (defaultFilters.val_categorie) {
+            inpCategorie.value = defaultFilters.val_categorie;
+        }
+
+        // Set the default value for 'gr_chck' (select checkboxes)
+        let tipuri = document.getElementsByName("gr_chck");
+        if (defaultFilters.val_tip && defaultFilters.val_tip.length > 0) {
+            for (let t of tipuri) {
+                if (defaultFilters.val_tip.includes(t.value)) {
+                    t.checked = true;
+                }
+            }
+        }
+
+        // Set the default value for 'i_datalist'
+        let valMaterialInput = document.getElementById("i_datalist");
+        if (defaultFilters.val_material) {
+            valMaterialInput.value = defaultFilters.val_material;
+        }
+
+        // Set the default selected options for 'i_sel_multiplu' (multi-select)
+        let valMaterial2 = document.getElementById("i_sel_multiplu");
+        if (defaultFilters.selectedMaterials && defaultFilters.selectedMaterials.length > 0) {
+            for (let option of valMaterial2.options) {
+                if (defaultFilters.selectedMaterials.includes(option.value)) {
+                    option.selected = true;
+                }
+            }
+        }
+
+        // Set the default value for 'i_textarea'
+        let valDescriere = document.getElementById("i_textarea");
+        if (defaultFilters.val_descriere) {
+            valDescriere.value = defaultFilters.val_descriere;
+        }
+        filterProducts();
+    };
+
 
     function filterProducts() {
-
         let greutate = document.getElementsByName("gr_rad");
 
         let tipuri = document.getElementsByName("gr_chck");
@@ -101,6 +167,19 @@ window.addEventListener("DOMContentLoaded", function () {
                 prod.style.display = "block";
 
         }
+
+        const filters = {
+            val_nume,
+            val_greutate,
+            val_pret,
+            val_categorie,
+            val_tip,
+            val_material,
+            val_descriere,
+            selectedMaterials
+        };
+        if (getCookie("acceptat_banner"))
+            setLastFiltersCookie(filters);
     };
 
     document.getElementById("inp-pret").onchange = function () {
@@ -156,6 +235,8 @@ window.addEventListener("DOMContentLoaded", function () {
             document.getElementById("i_textarea").value = "";
             document.getElementById("i_sel_multiplu").value = "";
             var produse = document.getElementsByClassName("produs");
+
+            resetLastFiltersCookie();
 
             for (let prod of produse) {
                 prod.style.display = "block";

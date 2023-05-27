@@ -26,3 +26,7 @@ html {
 #columnc {
     column-count: 1;
 }
+
+.disclaimer-banner.animation {
+    animation: bannerAnimation 0s forwards;
+}
