@@ -52,10 +52,10 @@ class AccesBD {
      * /
 
     /**
-     * Returneaza instanta unica a clasei
+     * Returneaza instanta unica a clasei - JSDOC
      *
      * @param {ObiectConexiune} un obiect cu datele pentru query
-     * @returns {AccesBD}
+     * @returns {AccesBD} 
      */
     static getInstanta({ init = "local" } = {}) {//daca am function f({a=10, b, c=20}={}) -> apelam f({a:5, b:7}) -> a=5, b=7, c=20
         console.log(this);//this-ul e chiar clasa, nu doar instanta clasei, pt ca metoda statica
@@ -182,19 +182,19 @@ class AccesBD {
         this.client.query(comanda, callback)
     }
 
-    // updateParametrizat({tabel="",campuri=[],valori=[], conditiiAnd=[]} = {}, callback, parametriQuery){
-    //     if(campuri.length!=valori.length)
-    //         throw new Error("Numarul de campuri difera de nr de valori")
-    //     let campuriActualizate=[];
-    //     for(let i=0;i<campuri.length;i++)
-    //         campuriActualizate.push(`${campuri[i]}=$${i+1}`);
-    //     let conditieWhere="";
-    //     if(conditiiAnd.length>0)
-    //         conditieWhere=`where ${conditiiAnd.join(" and ")}`;
-    //     let comanda=`update ${tabel} set ${campuriActualizate.join(", ")}  ${conditieWhere}`;
-    //     console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111",comanda);
-    //     this.client.query(comanda,valori, callback)
-    // }
+    updateParametrizat({ tabel = "", campuri = [], valori = [], conditiiAnd = [] } = {}, callback, parametriQuery) {
+        if (campuri.length != valori.length)
+            throw new Error("Numarul de campuri difera de nr de valori")
+        let campuriActualizate = [];
+        for (let i = 0; i < campuri.length; i++)
+            campuriActualizate.push(`${campuri[i]}=$${i + 1}`);
+        let conditieWhere = "";
+        if (conditiiAnd.length > 0)
+            conditieWhere = `where ${conditiiAnd.join(" and ")}`;
+        let comanda = `update ${tabel} set ${campuriActualizate.join(", ")}  ${conditieWhere}`;
+        console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1111", comanda);
+        this.client.query(comanda, valori, callback)
+    }
 
 
     //TO DO
