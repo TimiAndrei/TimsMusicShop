@@ -18,6 +18,7 @@ const puppeteer = require('puppeteer');
 const mongodb = require('mongodb');
 const helmet = require('helmet');
 const xmljs = require('xml-js');
+const ejs = require("ejs");
 
 const request = require("request");
 
@@ -128,8 +129,8 @@ app.get("/favicon.ico", function (req, res) {
 app.get(["/index", "/", "/home", "/login"], async function (req, res) {
     let sir = req.session.mesajLogin;
     req.session.succesLogin = null;
-
-    res.render("pagini/index", { ip: req.ip, a: 10, b: 20, imagini: obGlobal.obImagini.imagini, mesajLogin: sir });
+    message = null;
+    res.render("pagini/index", { imagini: obGlobal.obImagini.imagini, mesajLogin: sir, message: message });
 }); //render - compileaza ejs-ul si il trimite catre client
 // render stie ca e folosit pentru template, si se uita in views (folderul default)
 app.get("/despre", function (req, res) {
@@ -191,10 +192,7 @@ client.query("select id from instrumente", function (err, rez) {
 async function genereazaPdf(stringHTML, numeFis, callback) {
     const chrome = await puppeteer.launch();
     const document = await chrome.newPage();
-    console.log("inainte load")
     await document.setContent(stringHTML, { waitUntil: "load" });
-
-    console.log("dupa load")
     await document.pdf({ path: numeFis, format: 'A4' });
     await chrome.close();
     if (callback)
@@ -202,76 +200,62 @@ async function genereazaPdf(stringHTML, numeFis, callback) {
 }
 
 app.post("/cumpara", function (req, res) {
-    console.log(req.body);
-    console.log("Utilizator:", req?.utilizator);
-    console.log("Utilizator:", req?.utilizator?.rol?.areDreptul?.(Drepturi.cumparareProduse));
-    console.log("Drept:", req?.utilizator?.areDreptul?.(Drepturi.cumparareProduse));
-    if (req?.utilizator?.areDreptul?.(Drepturi.cumparareProduse)) {
-        AccesBD.getInstanta().select({
-            tabel: "instrumente",
-            campuri: ["*"],
-            conditiiAnd: [`id in (${req.body.ids_prod})`]
-        }, function (err, rez) {
-            if (!err && rez.rowCount > 0) {
-                console.log("produse:", rez.rows);
-                let rezFactura = ejs.render(fs.readFileSync("./views/pagini/factura.ejs").toString("utf-8"), {
-                    protocol: obGlobal.protocol,
-                    domeniu: obGlobal.numeDomeniu,
-                    utilizator: req.session.utilizator,
-                    produse: rez.rows
-                });
-                console.log(rezFactura);
-                let numeFis = `./temp/factura${(new Date()).getTime()}.pdf`;
-                genereazaPdf(rezFactura, numeFis, function (numeFis) {
-                    mesajText = `Stimate ${req.session.utilizator.username} aveti mai jos rezFactura.`;
-                    mesajHTML = `<h2>Stimate ${req.session.utilizator.username},</h2> aveti mai jos rezFactura.`;
-                    req.utilizator.trimiteMail("Factura", mesajText, mesajHTML, [{
-                        filename: "factura.pdf",
-                        content: fs.readFileSync(numeFis)
-                    }]);
-                    res.send("Totul e bine!");
-                });
-                rez.rows.forEach(function (elem) { elem.cantitate = 1 });
-                let jsonFactura = {
-                    data: new Date(),
-                    username: req.session.utilizator.username,
-                    produse: rez.rows
-                }
-                if (obGlobal.bdMongo) {
-                    obGlobal.bdMongo.collection("facturi").insertOne(jsonFactura, function (err, rezmongo) {
-                        if (err) console.log(err)
-                        else console.log("Am inserat factura in mongodb");
+    var formular = new formidable.IncomingForm();
+    formular.parse(req, function (err, campuriText) {
+        let produse = campuriText.cos_produse;
+        if (req?.utilizator?.areDreptul?.(Drepturi.cumparareProduse)) {
+            AccesBD.getInstanta().select({
+                tabel: "instrumente",
+                campuri: ["*"],
+                conditiiAnd: [`id in (${produse})`]
+            }, function (err, rez) {
+                if (!err && rez.rowCount > 0) {
+                    console.log("produse:", rez.rows);
+                    let rezFactura = ejs.render(fs.readFileSync("./views/pagini/factura.ejs").toString("utf-8"), {
+                        protocol: obGlobal.protocol,
+                        domeniu: obGlobal.numeDomeniu,
+                        utilizator: req.session.utilizator,
+                        produse: rez.rows
+                    });
+                    let numeFis = `./temp/factura${(new Date()).getTime()}.pdf`;
+                    genereazaPdf(rezFactura, numeFis, function (numeFis) {
+                        mesajText = `Stimate ${req.session.utilizator.username} aveti mai jos factura.`;
+                        mesajHTML = `<h2>Stimate ${req.session.utilizator.username},</h2> aveti mai jos factura.`;
+                        req.utilizator.trimiteMail("Factura", mesajText, mesajHTML, [{
+                            filename: "factura.pdf",
+                            content: fs.readFileSync(numeFis)
+                        }]);
+                        message = "S-a efectuat comanda, si am trimis factura pe mail !"; // Set the message variable to the success message
+                        res.render("pagini/index", { imagini: obGlobal.obImagini.imagini, message: message }); // Render the index page with the message parameter
+                    });
+                    rez.rows.forEach(function (elem) { elem.cantitate = 1 });
+                    let jsonFactura = {
+                        data: new Date(),
+                        username: req.session.utilizator.username,
+                        produse: rez.rows
+                    }
+                    if (obGlobal.bdMongo) {
+                        obGlobal.bdMongo.collection("facturi").insertOne(jsonFactura, function (err, rezmongo) {
+                            if (err) console.log(err)
+                            else console.log("Am inserat factura in mongodb");
 
-                        obGlobal.bdMongo.collection("facturi").find({}).toArray(
-                            function (err, rezInserare) {
-                                if (err) console.log(err)
-                                else console.log(rezInserare);
-                            })
-                    })
+                            obGlobal.bdMongo.collection("facturi").find({}).toArray(
+                                function (err, rezInserare) {
+                                    if (err) console.log(err)
+                                    else console.log(rezInserare);
+                                })
+                        })
+                    }
                 }
-            }
-        })
-    }
-    else {
-        res.send("Nu puteti cumpara daca nu sunteti logat sau nu aveti dreptul!");
-    }
+            })
+
+        }
+        else {
+            afiseazaEroare(res, 405);
+        }
+    });
 
 });
-
-app.get("/grafice", function (req, res) {
-    if (!(req?.session?.utilizator && req.utilizator.areDreptul(Drepturi.vizualizareGrafice))) {
-        afisEroare(res, 403);
-        return;
-    }
-    res.render("pagini/grafice");
-
-})
-
-app.get("/update_grafice", function (req, res) {
-    obGlobal.bdMongo.collection("facturi").find({}).toArray(function (err, rezultat) {
-        res.send(JSON.stringify(rezultat));
-    });
-})
 
 app.get("/produse", function (req, res) {
     client.query(
@@ -502,6 +486,8 @@ function afiseazaEroare(res, _identificator, _titlu = "titlu default", _text, _i
     let eroare = vErori.find(function (element) {
         return element.identificator === _identificator;
     });
+
+    console.log(eroare)
     if (eroare) {
         let titlu = _titlu == "titlu default" ? (eroare.titlu || _titlu) : _titlu;
         // daca programatorul seteaza titlul, se ia titlul din argument,
@@ -519,7 +505,7 @@ function afiseazaEroare(res, _identificator, _titlu = "titlu default", _text, _i
     }
     else {
         let errDef = obGlobal.obErori.eroare_default;
-        res.render("pagini/eroare", { titlu: errDef.titlu, text: errDef.text, imagine: errDef.imagine });
+        res.render("pagini/eroare", { titlu: errDef.titlu, text: errDef.text, imagine: obGlobal.obErori.cale_baza = "/" + errDef.imagine });
     }
 }
 
@@ -542,7 +528,6 @@ app.post("/sterge_utiliz", function (req, res) {
 app.post("/inregistrare", function (req, res) {
     var username;
     var poza;
-    console.log("ceva");
     var formular = new formidable.IncomingForm()
     formular.parse(req, function (err, campuriText, campuriFisier) {//4
         console.log("Inregistrare:", campuriText);
@@ -655,7 +640,6 @@ app.post("/profil", function (req, res) {
                 }
                 else {
                     //actualizare sesiune
-                    console.log("ceva");
                     req.session.utilizator.nume = campuriText.nume;
                     req.session.utilizator.prenume = campuriText.prenume;
                     req.session.utilizator.email = campuriText.email;
@@ -701,7 +685,6 @@ app.get("/cod/:username/:token", function (req, res) {
 
 app.post("/login", function (req, res) {
     var username;
-    console.log("ceva");
     var formular = new formidable.IncomingForm()
     formular.parse(req, function (err, campuriText, campuriFisier) {
         Utilizator.getUtilizDupaUsername(campuriText.username, {

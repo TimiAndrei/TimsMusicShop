@@ -51,6 +51,12 @@ window.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    let buton_cos = document.getElementById("cos");
+    let cos_produse = document.getElementById("cos_produse");
+    buton_cos.onclick = function () {
+        cos_produse.value = localStorage.getItem("cos_virtual");
+    };
+
     actualizare_cos(iduriProduse);
 
     let reset_cos = document.getElementById("reset_cos");
@@ -59,6 +65,12 @@ window.addEventListener("DOMContentLoaded", function () {
         localStorage.removeItem("cos_virtual");
         location.reload();
     }
+
+    let form = document.getElementById("form_cumpara");
+
+    form.addEventListener("submit", function () {
+        localStorage.removeItem("cos_virtual");
+    });
 
     const savedFilters = getCookie("last_filters");
 

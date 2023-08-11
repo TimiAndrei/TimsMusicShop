@@ -90,18 +90,18 @@
 <div class="modal fade" id="cosModal" tabindex="-1" aria-labelledby="cosModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <form id="form_inreg" method="post" class="date" action="/cumpara" enctype="multipart/form-data">
+      <form id="form_cumpara" method="post" class="date" action="/cumpara" enctype="multipart/form-data">
+        <input type="hidden" id="cos_produse" name="cos_produse" value="">
         <div class="modal-header">
           <h5 class="modal-title" id="loginModalLabel">Coș virtual</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button id="reset_cos" type="reset" class="btn btn-danger">Reseteaza</button>
-          <button type="submit" class="btn btn-primary">Cumpără</button>
+          <button id="comanda_cos" type="submit" class="btn btn-primary">Cumpără</button>
         </div>
       </form>
     </div>

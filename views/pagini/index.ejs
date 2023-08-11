@@ -15,12 +15,17 @@
 <body>
   <%- include("../fragmente/header.ejs") %>
   <div class="row row-special">
+    <%- include("../fragmente/modals") %>
     <video playsinline autoplay muted loop disablePictureInPicture disableRGXMode poster="/Resurse/Imagini/poster.jpg" id="bgvid">
       <source src="/Resurse/video/prezentare.mp4">
     </video>
+    <% if (message) { %>
+    <div id="success-message" class="alert alert-success" role="alert" style="display:absolute; margin:0">
+      <%= message %>
+    </div>
+    <% } %>
   </div>
   <main id="grid-pagina">
-    <%- include("../fragmente/modals") %>
     <section id="Descriere" class="no-spacing">
 
       <!-- <div id="container-moving-text">
@@ -282,7 +287,17 @@
     <div id="watermark">
     </div> -->
   </main>
+  <script>
+    // Get the success message element
+    var successMessage = document.getElementById("success-message");
 
+    // If the success message element exists, remove it after 5 seconds
+    if (successMessage) {
+      setTimeout(function() {
+        successMessage.remove();
+      }, 5000);
+    }
+  </script>
   <%- include("../fragmente/footer.ejs") %>
 </body> <!-- cerinta 7, s-au folosit tagurile <p> si <ul>|| cerinta 4, impartirea body-ului -->
 
