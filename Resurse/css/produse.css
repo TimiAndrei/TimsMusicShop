@@ -93,6 +93,7 @@ main {
 .selecteaza-cos:hover {
     background-color: var(--complement1);
     border: 3px solid var(--text-black);
+    cursor: pointer;
 }
 
 .column-wrapper {
@@ -131,6 +132,7 @@ main {
     position: relative;
 }
 
+
 .card-appear {
     opacity: 1;
     transform: translateY(0);
@@ -149,4 +151,10 @@ main {
     100% {
         transform: scale(1);
     }
+}
+
+.are_cutie_transport {
+    display: inline-block;
+    margin-right: 1rem;
+    margin-bottom: 10rem;
 }
