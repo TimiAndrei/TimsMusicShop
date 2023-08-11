@@ -5,7 +5,7 @@
 
 body {
     --menu-height: 50px;
-    --button-width: 300px;
+    --button-width: 220px;
     --menu-background: var(--complement4);
     --button-border: black;
     --menu-text-color: white;
@@ -22,7 +22,7 @@ nav {
     top: 0;
     margin-right: calc(-1*var(--spacing));
     margin-left: calc(-1*var(--spacing));
-    z-index: 1;
+    z-index: 100;
 }
 
 ul.menu {
@@ -68,12 +68,12 @@ ul.menu li div {
 
 }
 
-ul.menu li ul li a::before {
+/* ul.menu li ul li a::before {
     content: "→";
     opacity: 0;
     position: absolute;
     left: 10px;
-}
+} */
 
 ul.menu li ul li a:hover::before {
     opacity: 1;
@@ -169,7 +169,7 @@ ul.menu li:hover ul {
     display: none;
 }
 
-.arrow {
+/* .arrow {
     opacity: 0;
     transition: all 0.3s linear;
     position: absolute;
@@ -180,7 +180,7 @@ a:hover .arrow {
     opacity: 1;
     display: block;
     transform: translateX(100%);
-}
+} */
 
 .hamburger-menu {
     display: none;
