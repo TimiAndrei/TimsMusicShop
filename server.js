@@ -86,6 +86,12 @@ app = express();
 app.set("view engine", "ejs"); // motor de template 
 // app.set trebuie pus inainte de get-uri 
 
+app.use((req, res, next) => {
+    let currentPage = req.path.split('/').pop().split('.')[0];
+    res.locals.currentPage = currentPage;
+    next();
+});
+
 app.use("/Resurse", express.static(__dirname + "/Resurse"));
 // express.static e o functie care returneaza un obiect
 // asa "livrez" resursele pentru site 
@@ -123,7 +129,6 @@ app.get(["/index", "/", "/home", "/login"], async function (req, res) {
     let sir = req.session.mesajLogin;
     req.session.succesLogin = null;
 
-
     res.render("pagini/index", { ip: req.ip, a: 10, b: 20, imagini: obGlobal.obImagini.imagini, mesajLogin: sir });
 }); //render - compileaza ejs-ul si il trimite catre client
 // render stie ca e folosit pentru template, si se uita in views (folderul default)
@@ -156,8 +161,7 @@ app.get("/galerie_animata", function (req, res) {
 app.post("/produse_cos", function (req, res) {
     console.log(req.body);
     if (req.body.ids_prod.length != 0) {
-        //TO DO : cerere catre AccesBD astfel incat query-ul sa fi `select nume, descriere, pret, gramaj, imagine from prajituri where id in (lista de id-uri)`
-        AccesBD.getInstanta().select({ tabel: "prajituri", campuri: "nume,descriere,pret,gramaj,imagine".split(","), conditiiAnd: [`id in (${req.body.ids_prod})`] },
+        AccesBD.getInstanta().select({ tabel: "instrumente", campuri: "nume,descriere,pret,materiale,imagine, ".split(","), conditiiAnd: [`id in (${req.body.ids_prod})`] },
             function (err, rez) {
                 if (err)
                     res.send([]);
@@ -176,7 +180,7 @@ cale_qr = __dirname + "/resurse/imagini/qrcode";
 if (fs.existsSync(cale_qr))
     fs.rmSync(cale_qr, { force: true, recursive: true });
 fs.mkdirSync(cale_qr);
-client.query("select id from prajituri", function (err, rez) {
+client.query("select id from instrumente", function (err, rez) {
     for (let prod of rez.rows) {
         let cale_prod = obGlobal.protocol + obGlobal.numeDomeniu + "/produs/" + prod.id;
         //console.log(cale_prod);
@@ -204,7 +208,7 @@ app.post("/cumpara", function (req, res) {
     console.log("Drept:", req?.utilizator?.areDreptul?.(Drepturi.cumparareProduse));
     if (req?.utilizator?.areDreptul?.(Drepturi.cumparareProduse)) {
         AccesBD.getInstanta().select({
-            tabel: "prajituri",
+            tabel: "instrumente",
             campuri: ["*"],
             conditiiAnd: [`id in (${req.body.ids_prod})`]
         }, function (err, rez) {
