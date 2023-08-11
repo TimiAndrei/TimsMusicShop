@@ -1,0 +1,58 @@
+.info-produse {
+    background-color: var(--complement1);
+    padding: 0.2rem;
+    box-shadow: 0px 0px 0.5rem 0.15rem grey;
+}
+
+.produs {
+    position: relative;
+}
+
+.column-wrapper {
+    display: flex;
+}
+
+.column-wrapper .column {
+    flex: 1;
+    padding: 0.5rem;
+}
+
+.column-wrapper .column p {
+    margin-bottom: -15px;
+    margin-left: -30px;
+    font-weight: bolder;
+    color: var(--complement2);
+}
+
+.column-wrapper .column p span {
+    font-weight: lighter;
+    color: var(--text-black);
+}
+
+#checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.div-tip {
+    width: auto;
+}
+
+
+.produs {
+    opacity: 1;
+    position: relative;
+}
+
+
+.card-appear {
+    opacity: 1;
+    transform: none;
+    animation: none;
+}
+
+.are_cutie_transport {
+    display: inline-block;
+    margin-right: 1rem;
+    margin-bottom: 10rem;
+}
