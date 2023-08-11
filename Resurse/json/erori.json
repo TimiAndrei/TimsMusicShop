@@ -9,15 +9,15 @@
         {
             "identificator": 404,
             "status": true,
-            "titlu": "404 - N-am, bre!",
-            "text": "Nu-i pe serverul ăsta, sorry, caută în altă parte!",
+            "titlu": "404 - Not found",
+            "text": "Nu există pagina pe server!",
             "imagine": "lupa.png"
         },
         {
             "identificator": 403,
             "status": true,
-            "titlu": "403 - Da, tu ce cauți aici?!!",
-            "text": "Ai greșit ruta. Stânga-împrejur și pa!",
+            "titlu": "403 - Permission denied!",
+            "text": "Ai greșit ruta sau nu ai acces la această pagină!",
             "imagine": "interzis.png"
         },
         {
