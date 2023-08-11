@@ -1,0 +1,109 @@
+<!-- Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="form_login" method="post" class="date" action="/login" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Login</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div class="mb-3">
+            <label for="inp-username" class="form-label">Username:</label>
+            <input type="text" name="username" id="inp-username" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="parl" class="form-label">Parola:</label>
+            <input type="password" name="parola" id="parola" class="form-control" required>
+          </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Logare</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Register Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="form_inreg" method="post" class="date" action="/inregistrare" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Inregistrare</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label for="inp-username" class="form-label">Username:</label>
+            <input type="text" name="username" id="register-username" class="form-control" value="prof<%= Math.floor(Math.random()*100000) %>" required pattern="[A-Za-z0-9#_./]+">
+          </div>
+          <div class="mb-3">
+            <label for="inp-nume" class="form-label">Nume:</label>
+            <input type="text" name="nume" id="register-nume" class="form-control" value="Gogulescu">
+          </div>
+          <div class="mb-3">
+            <label for="inp-prenume" class="form-label">Prenume:</label>
+            <input type="text" name="prenume" id="register-prenume" class="form-control" value="Gogu">
+          </div>
+          <div class="mb-3">
+            <label for="parl" class="form-label">Parola:</label>
+            <input type="password" name="parola" id="parl" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="rparl" class="form-label">Reintroduceti parola:</label>
+            <input type="password" name="rparola" id="rparl" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="inp-email" class="form-label">Email:</label>
+            <input type="text" name="email" id="inp-email" class="form-control" value="profprofprof007@gmail.com" required size="50">
+          </div>
+          <div class="mb-3">
+            <label for="sel-culoare" class="form-label">Culoare text chat:</label>
+            <select name="culoare_chat" id="sel-culoare" class="form-select">
+              <option value="red" selected>rosu</option>
+              <option value="green">verde</option>
+              <option value="blue">albastru</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="inp-poza" class="form-label">Poza:</label>
+            <input type="file" name="poza" id="inp-poza" class="form-control">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="reset" class="btn btn-danger">Reseteaza</button>
+          <button type="submit" class="btn btn-primary">Trimite</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Cos Modal -->
+<div class="modal fade" id="cosModal" tabindex="-1" aria-labelledby="cosModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <form id="form_inreg" method="post" class="date" action="/cumpara" enctype="multipart/form-data">
+        <div class="modal-header">
+          <h5 class="modal-title" id="loginModalLabel">Coș virtual</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button id="reset_cos" type="reset" class="btn btn-danger">Reseteaza</button>
+          <button type="submit" class="btn btn-primary">Cumpără</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
