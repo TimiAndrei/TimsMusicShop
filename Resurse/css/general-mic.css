@@ -18,11 +18,11 @@ html {
     /*afisate pe rand pe o singura coloana in ordinea din html*/
 }
 
-#tabel {
+/* #tabel {
     overflow-x: scroll;
     width: 300px;
     text-align: center;
-}
+} */
 
 #columnc {
     column-count: 1;
@@ -30,4 +30,48 @@ html {
 
 .disclaimer-banner.animation {
     animation: bannerAnimation 0s forwards;
+}
+
+.row-special {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -24.5px;
+    width: 100vw;
+}
+
+#bgvid {
+    object-fit: cover;
+    padding: 0;
+    margin: 0;
+}
+
+.theme-wrapper {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    top: 2.5rem;
+}
+
+.theme-wrapper .custom-switch {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    /* Adjust this value to create spacing between the switch and the icons */
+}
+
+.theme-pic-soare {
+    width: 16px;
+    height: 16px;
+    margin-right: 1px;
+    margin-bottom: 5px;
+    /* Adjust this value to create spacing between the icons */
+}
+
+.theme-pic-luna {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    margin-bottom: 8px;
+    /* Adjust this value to create spacing between the icons */
 }

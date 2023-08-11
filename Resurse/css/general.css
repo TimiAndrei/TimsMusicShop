@@ -38,27 +38,6 @@ html {
     font-size: 20px;
 }
 
-ul {
-    padding-left: 15px;
-}
-
-
-#Special {
-    font-family: 'Tangerine', serif;
-    font-size: 48px;
-}
-
-#Oferte {
-
-    border: 3px solid red;
-}
-
-#Descriere>h2 {
-    background-color: var(--background-color);
-    color: var(--background-white);
-    padding-left: 10px;
-}
-
 body {
     --background-white: #f5f5f5;
     --text-black: black;
@@ -101,6 +80,35 @@ body {
     padding-right: var(--spacing);
     min-width: 400px;
 }
+
+ul {
+    padding-left: 15px;
+}
+
+
+#Special {
+    font-family: 'Tangerine', serif;
+    font-size: 48px;
+    font-weight: bold;
+    background-image: url("/Resurse/Imagini/MusicBanner3.jpg");
+    background-size: cover;
+    color: black;
+    margin: 0;
+    margin-left: -10px;
+    margin-right: -10px;
+}
+
+#Oferte {
+
+    border: 3px solid red;
+}
+
+#Descriere>h2 {
+    background-color: var(--background-color);
+    color: var(--background-white);
+    padding-left: 10px;
+}
+
 
 h1 {
     font-size: 2.5em;
@@ -150,6 +158,10 @@ iframe {
 #grid-pagina>section {
     padding: var(--padding);
     border: 10px solid var(--complement2);
+}
+
+#grid-pagina>section.no-padding {
+    padding: 0;
 }
 
 img {
@@ -274,8 +286,10 @@ footer {
 }
 
 #z2table th {
-    border: 1px solid var(--text-black);
+    border: 1px solid black;
     background-color: var(--complement3);
+    text-align: center;
+    color: var(--text-white);
 }
 
 
@@ -457,7 +471,7 @@ hr::after {
     column-rule-style: dotted;
 }
 
-p::selection {
+*::selection {
     color: var(--background-white);
     background-color: var(--background-color);
 }
@@ -483,14 +497,17 @@ p::selection {
     }
 }
 
+.row-special {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: calc(-1.3*var(--spacing));
+    width: 100vw;
+}
+
 #bgvid {
     object-fit: cover;
-    width: 100vw;
-    height: 100vh;
-    /* position: fixed; */
-    /* top: 0; */
-    /* left: 0; */
-    z-index: -100;
+    padding: 0;
+    margin: 0;
 }
 
 .theme-wrapper {
@@ -498,7 +515,7 @@ p::selection {
     align-items: center;
     position: absolute;
     right: 0;
-    top: 2rem;
+    top: 1.5rem;
 }
 
 .theme-wrapper .custom-switch {
@@ -508,10 +525,19 @@ p::selection {
     /* Adjust this value to create spacing between the switch and the icons */
 }
 
-.theme-pic {
+.theme-pic-soare {
+    width: 16px;
+    height: 16px;
+    margin-right: 3px;
+    margin-bottom: 15px;
+    /* Adjust this value to create spacing between the icons */
+}
+
+.theme-pic-luna {
     width: 16px;
     height: 16px;
     margin-right: 5px;
+    margin-bottom: 18px;
     /* Adjust this value to create spacing between the icons */
 }
 
@@ -523,18 +549,15 @@ p::selection {
     transition: opacity 5s, background-color 5s;
     padding: var(--padding);
     height: 25vh;
-    width: 25vw;
+    width: 100vw;
     opacity: 0;
 }
 
-.banner-content p:first-of-type {
-    margin-left: -8px;
-}
-
 .banner-content p {
-    font-size: 1.5vw;
     margin-bottom: 10px;
+    text-align: center;
     color: var(--text-white);
+    margin-left: calc(-1*var(--spacing));
 }
 
 .banner-content button {
@@ -543,7 +566,8 @@ p::selection {
     border: black solid 1px;
     cursor: pointer;
     position: relative;
-    left: 40%;
+    left: 50%;
+    margin-left: calc(-1*var(--spacing));
 }
 
 @keyframes bannerAnimation {
@@ -560,4 +584,19 @@ p::selection {
 
 .disclaimer-banner.animation {
     animation: bannerAnimation 5s forwards;
+}
+
+
+footer {
+    margin-left: calc(-1*var(--spacing));
+    margin-right: calc(-1*var(--spacing));
+}
+
+.no-spacing {
+    margin-left: calc(-1*var(--spacing));
+    margin-right: calc(-1*var(--spacing));
+}
+
+.no-padding {
+    padding: 0;
 }

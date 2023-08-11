@@ -30,3 +30,47 @@ html {
 .disclaimer-banner.animation {
     animation: bannerAnimation 0s forwards;
 }
+
+.row-special {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: -34.5px;
+    width: 100vw;
+}
+
+#bgvid {
+    object-fit: cover;
+    padding: 0;
+    margin: 0;
+}
+
+.theme-wrapper {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    top: 2rem;
+}
+
+.theme-wrapper .custom-switch {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    /* Adjust this value to create spacing between the switch and the icons */
+}
+
+.theme-pic-soare {
+    width: 16px;
+    height: 16px;
+    margin-right: 3px;
+    margin-bottom: 10px;
+    /* Adjust this value to create spacing between the icons */
+}
+
+.theme-pic-luna {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    margin-bottom: 13px;
+    /* Adjust this value to create spacing between the icons */
+}
