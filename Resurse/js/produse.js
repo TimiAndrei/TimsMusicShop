@@ -2,7 +2,6 @@ window.addEventListener("DOMContentLoaded", function () {
 
     let iduriProduse = localStorage.getItem("cos_virtual");
     iduriProduse = iduriProduse ? iduriProduse.split(",") : [];      //["3","1","10","4","2"]
-
     for (let idp of iduriProduse) {
         let ch = document.querySelector(`[value='${idp}'].select-cos`);
         if (ch) {
@@ -13,25 +12,52 @@ window.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    function actualizare_cos(iduriProduse) {
+        // ----------- trimitere produse in modal cos virtual
+        var modal = document.getElementById("cosModal");
+        var modalBody = modal.querySelector(".modal-body");
+        for (var id of iduriProduse) {
+            console.log(id);
+            var produs = document.getElementById(`ar_ent_${id}`);
+            console.log(produs);
+            modalBody.append(produs);
+            var selecteazaCosLabel = produs.querySelector(".selecteaza-cos");
+            selecteazaCosLabel.style.display = "none";
+        }
+    }
+
     //----------- adaugare date in cosul virtual (din localStorage)
     let checkboxuri = document.getElementsByClassName("select-cos");
     for (let ch of checkboxuri) {
-        ch.onchange = function () {
-            let iduriProduse = localStorage.getItem("cos_virtual");
-            iduriProduse = iduriProduse ? iduriProduse.split(",") : [];
-
+        ch.onclick = function () {
+            let iduriProduse_actualizate = localStorage.getItem("cos_virtual");
+            iduriProduse_actualizate = iduriProduse_actualizate ? iduriProduse_actualizate.split(",") : [];
+            iduriProduse = iduriProduse_actualizate;
             if (this.checked) {
                 iduriProduse.push(this.value)
+                actualizare_cos(iduriProduse_actualizate);
             }
             else {
                 let poz = iduriProduse.indexOf(this.value);
                 if (poz != -1) {
                     iduriProduse.splice(poz, 1);
                 }
+                actualizare_cos(iduriProduse_actualizate);
             }
+
+            actualizare_cos(iduriProduse_actualizate);
 
             localStorage.setItem("cos_virtual", iduriProduse.join(","))
         }
+    }
+
+    actualizare_cos(iduriProduse);
+
+    let reset_cos = document.getElementById("reset_cos");
+
+    reset_cos.onclick = function () {
+        localStorage.removeItem("cos_virtual");
+        location.reload();
     }
 
     const savedFilters = getCookie("last_filters");
@@ -76,7 +102,7 @@ window.addEventListener("DOMContentLoaded", function () {
                 }
             }
         }
-
+        3
         // Set the default value for 'i_datalist'
         let valMaterialInput = document.getElementById("i_datalist");
         if (defaultFilters.val_material) {

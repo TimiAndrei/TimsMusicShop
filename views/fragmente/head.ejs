@@ -14,10 +14,9 @@
 <!-- integrarea favicon, cerinta 3-->
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine"> <!-- fontul Tangerine-->
-
-<script src="https://kit.fontawesome.com/4a102f1d9e.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/Resurse/css/costumizare_bootstrap.css" type="text/css">
 <link rel="stylesheet" href="/Resurse/css/reset.css" type="text/css">
+<link rel="stylesheet" href="/Resurse/css/bootstrap.css" type="text/css">
 <link rel="stylesheet" href="/Resurse/css/general.css" type="text/css">
 <link rel="stylesheet" href="/Resurse/css/general-mediu.css" type="text/css" media="screen and (max-width:1000px)">
 <link rel="stylesheet" href="/Resurse/css/general-mic.css" type="text/css" media="screen and (max-width:600px)">
@@ -28,5 +27,11 @@
 <link rel="stylesheet" href="/Resurse/css/print.css" type="text/css">
 <link rel="stylesheet" href="/Resurse/css/duotone.css" type="text/css">
 <link rel="stylesheet" href="/Resurse/css/galerie_animata.css" type="text/css">
+<link rel="stylesheet" href="/Resurse/css/produse_cos.css" type="text/css">
 
+<script src="https://kit.fontawesome.com/4a102f1d9e.js" crossorigin="anonymous"></script>
 <script src="/Resurse/js/cookies.js"></script>
+<% if (locals.currentPage !== 'produse') { %>
+<script src="/Resurse/js/cos.js"></script>
+<% } %>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>

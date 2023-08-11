@@ -2,9 +2,10 @@
 <html lang="ro">
 
 <head>
-  <meta name="description" content="Cofetaria Dulcelind ofera prajituri, torturi, produse de patiserie cu optiunea de achizitie online si livrare prin curier.">
-  <meta name="keywords" content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse">
+  <meta name="description" content="Tim's Music Shop ofera instrumente cu optiunea de achizitie online si livrare prin curier.">
+  <meta name="keywords" content="produse, instrumente">
   <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
+  <link rel="stylesheet" href="/resurse/css/produse_cos.css" type="text/css" />
   <title>Tim's Music Shop</title>
   <%- include("../fragmente/head") %>
   <script type="text/javascript" src=/Resurse/js/produse.js></script>
@@ -16,6 +17,7 @@
   <%- include("../fragmente/header") %>
 
   <main>
+    <%- include("../fragmente/modals") %>
     <div class="div-filtre">
       <h3>Filtrare Produse</h3>
       <div class="row">
@@ -176,8 +178,9 @@
 
                     <label class="selecteaza-cos">
                       Adaugă în coș<br />
-                      <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
+                      <input type="checkbox" class="select-cos disnone" value="<%-prod.id %>" autocomplete="off">
                     </label>
+
                 </div>
               </div>
             </article>
