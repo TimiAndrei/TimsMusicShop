@@ -7,6 +7,13 @@
     },
     "info_erori": [
         {
+            "identificator": 405,
+            "status": true,
+            "titlu": "405 - No rights!",
+            "text": "Nu ai dreptul de a comanda, pentru a comanda trebuie să fii logat!",
+            "imagine": "interzis.png"
+        },
+        {
             "identificator": 404,
             "status": true,
             "titlu": "404 - Not found",
