@@ -43,7 +43,7 @@ window.addEventListener("load", function () {
         document.getElementById("banner").classList.add("animation");
 
     this.document.getElementById("ok_cookies").onclick = function () {
-        setCookie("acceptat_banner", true, 60000);
+        setCookie("acceptat_banner", true, 6000000);
         document.getElementById("banner").style.display = "none"
     }
 })
