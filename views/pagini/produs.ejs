@@ -2,43 +2,42 @@
 <html lang="ro">
 
 <head>
-    <meta name="description"
-        content="Cofetaria Dulcelind ofera prajituri, torturi, produse de patiserie cu optiunea de achizitie online si livrare prin curier.">
-    <meta name="keywords" content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse">
+  <meta name="description" content="Cofetaria Dulcelind ofera prajituri, torturi, produse de patiserie cu optiunea de achizitie online si livrare prin curier.">
+  <meta name="keywords" content="cofetarie, Dulcelind, prajituri, torturi, dulce, pateuri, produse">
 
-    <title>Tim's Music Shop</title>
-    <%- include("../fragmente/head") %>
-        <link href="/resurse/css/produs.css" type="text/css" rel="stylesheet" />
+  <title>Tim's Music Shop</title>
+  <%- include("../fragmente/head") %>
+  <link href="/resurse/css/produs.css" type="text/css" rel="stylesheet" />
 </head>
 
 <body>
-    <%- include("../fragmente/header") %>
+  <%- include("../fragmente/header") %>
 
-        <main>
-            <section>
-                <h2>Pagină produs</h2>
-                <article id="art-produs">
-                    <h3><span class="nume"><%- locals.prod.nume %></span></h3>
-                    <p>Pret: <span class="pret"><%- locals.prod.pret %> </span></p>
-                    <p>Descriere: <span class="descriere"><%- locals.prod.descriere %> </span></p>
-                    <p>Materiale: <span class="materiale"><%- locals.prod.material %> </span></p>
-                    <p>Greutate: <span class="greutate"><%- locals.prod.greutate %> </span> kg</p>
-                    <p>Categorie: <span class="categorie"><%- locals.prod.categorie %> </span></p>
-                    <p>Tip: <span class="tip"><%- locals.prod.tip_instrument %> </span></p>
-                    <p>Nivel: <span class="nivel"><%- locals.prod.pentru %> </span></p>
-                    <p>Are cutie transport: <span class="cutie_transport"><%- locals.prod.are_cutie_transport %> </span>
-                    </p>
-                    <p>Data adăugare: <span class="categorie"><%- locals.prod.data_adaugare %> </span></p>
-                    <figure class="imag-produs">
-                        <img src="/resurse/imagini/produse/processed/<%- locals.prod.imagine %>"
-                            alt="[imagine <%- locals.prod.nume %>]" />
-                    </figure>
-                </article>
+  <main>
+    <%- include("../fragmente/modals") %>
+    <section>
+      <h2>Pagină produs</h2>
+      <article id="art-produs">
+        <h3><span class="nume"><%- locals.prod.nume %></span></h3>
+        <p>Pret: <span class="pret"><%- locals.prod.pret %> </span></p>
+        <p>Descriere: <span class="descriere"><%- locals.prod.descriere %> </span></p>
+        <p>Materiale: <span class="materiale"><%- locals.prod.material %> </span></p>
+        <p>Greutate: <span class="greutate"><%- locals.prod.greutate %> </span> kg</p>
+        <p>Categorie: <span class="categorie"><%- locals.prod.categorie %> </span></p>
+        <p>Tip: <span class="tip"><%- locals.prod.tip_instrument %> </span></p>
+        <p>Nivel: <span class="nivel"><%- locals.prod.pentru %> </span></p>
+        <p>Are cutie transport: <span class="cutie_transport"><%- locals.prod.are_cutie_transport %> </span>
+        </p>
+        <p>Data adăugare: <span class="categorie"><%- locals.prod.data_adaugare %> </span></p>
+        <figure class="imag-produs">
+          <img src="/resurse/imagini/produse/processed/<%- locals.prod.imagine %>" alt="[imagine <%- locals.prod.nume %>]" />
+        </figure>
+      </article>
 
-            </section>
-        </main>
+    </section>
+  </main>
 
-        <%- include("../fragmente/footer") %>
+  <%- include("../fragmente/footer") %>
 </body>
 
 </html>
